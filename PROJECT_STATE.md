@@ -33,3 +33,11 @@ PRIMARY_GOAL：完整汉化本机 Compositor，并持续跟随官方更新维护
 ## NEXT
 
 优先取得实际窗口证据（CUA 若持续超时需用户确认窗口状态），适配动态 UI / AppKit 并进行新建、导入、保存、重开、导出和快捷键验收。首个可用版本通过后，再接入正式版本自动跟进与安全更新。云端构建成功不等于完整汉化完成。
+
+## 当前工作：截图反馈修复
+
+- 用户明确要求：不再操作其桌面或应用；由用户人工截图验收。不得用 CUA、open、自动截图或模拟输入验收。代码、GitHub、构建和产物管理继续自主推进。
+- 用户截图确认程序打开、菜单中文生效；Width/Height、Transparent canvas/Pixels、Marquee/Rectangle/Add/Subtract/Expand/Contract 仍英文。该 Human Ground Truth 优先于旧静态候选检查。
+- 根因：运行时 String 绕过 SwiftUI 字面量本地化；已新增 display-boundary 适配器并补充词库至 645 条。
+- 已加入共用 Text(title)、枚举选择标签、选区按钮、原生对话框的显示翻译；混合模式使用 representedObject 保留原始英文标识。
+- 定向回归 3 项通过：截图对应控件接入、混合模式标识分离、Document 模型文件逐字节未变；相关 Swift 文件语法解析通过。云端编译及用户截图验收待完成。

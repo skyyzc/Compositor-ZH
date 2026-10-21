@@ -588,3 +588,61 @@ Foreground color	前景色
 Option-click to set the source	按住 Option 点击以设置取样源
 Canvas text	画布文字
 Canvas	画布
+Marquee	选框
+Magic	魔棒/对象选择
+Wand	魔棒
+Object	对象
+Freehand	自由套索
+Polygonal	多边形套索
+Subtract	减去
+Intersect	交集
+Replace	替换
+Transparent canvas	透明画布
+White canvas	白色画布
+Black canvas	黑色画布
+Inches	英寸
+Centimeters	厘米
+Millimeters	毫米
+in	英寸
+cm	厘米
+mm	毫米
+Parametric	参数曲线
+Point	点曲线
+Point Color	点颜色
+Luminance	明亮度
+Three-Way	三向
+Global	全局
+Off	关闭
+Guided	引导
+Perspective	透视
+Rectilinear	直线
+Version 1	版本 1
+Version 2	版本 2
+Version 3	版本 3
+Version 4	版本 4
+Version 5	版本 5
+Version 6	版本 6
+Effects	效果
+Vivid Light	亮光
+Linear Light	线性光
+Pin Light	点光
+Hard Mix	实色混合
+Divide	划分
+Basic	基本
+Advanced	高级
+Diffusion	柔光扩散
+Bloom	泛光
+Halation	光晕
+Highlight Priority	高光优先
+Color Priority	颜色优先
+Paint Overlay	绘画叠加
+Liquify	液化
+Smudge	涂抹
+Heal	修复
+Clone	仿制
+Square	方形
+Round	圆形
+Circle	圆形
+Light on dark	深色背景上的亮色
+Start see-through, or with a white or black Background layer. Click to switch.	以透明画布、白色或黑色背景图层开始。点击切换。
+Units: pixels, inches, centimeters or millimeters. Click to switch.	单位：像素、英寸、厘米或毫米。点击切换。

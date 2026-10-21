@@ -2,7 +2,7 @@ name: Chinese preview
 on:
   push:
     branches: [main]
-    paths: ['scripts/**', 'translations/**', 'upstream.json', '.github/workflows/build.yml']
+    paths: ['scripts/**', 'tests/**', 'translations/**', 'upstream.json', '.github/workflows/build.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,6 +24,8 @@ jobs:
           python-version: '3.12'
       - name: Fetch pinned official source
         run: python3 scripts/fetch-source.py
+      - name: Verify localization boundaries
+        run: python3 -m unittest discover -s tests
       - name: Build Chinese preview
         run: python3 scripts/build.py
       - name: Package preview

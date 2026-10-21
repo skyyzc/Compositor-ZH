@@ -39,6 +39,8 @@ text = project.read_text().replace('PRODUCT_BUNDLE_IDENTIFIER = com.wonderassemb
 text = text.replace('STRING_CATALOG_GENERATE_SYMBOLS = YES;', 'STRING_CATALOG_GENERATE_SYMBOLS = NO;')
 text = text.replace('PRODUCT_NAME = "$(TARGET_NAME)";', 'PRODUCT_NAME = "Compositor 中文";')
 project.write_text(text)
+from adapt import apply
+adaptations = apply(output)
 # Discover conservative static UI candidates; dynamic strings require a separate review.
 pattern = re.compile(r'(?:Text|Button|Menu|CommandMenu|Toggle|Picker|Label|TextField|SecureField|GroupBox|Section|Window|\.help|\.navigationTitle|\.accessibilityLabel)\(\s*"((?:[^"\\]|\\.)*)"')
 found = {}
@@ -48,7 +50,7 @@ for path in (output / 'Compositor').rglob('*.swift'):
         if '\\' in value or not re.search('[A-Za-z]', value): continue
         if value not in translations:
             found.setdefault(value, []).append(str(path.relative_to(output)))
-report = {'upstream_commit': subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip(), 'dictionary_entries': len(translations), 'untranslated_static_candidates': found, 'limitations': ['Static SwiftUI catalog only; dynamic labels and AppKit text still require adaptation.', 'Build and runtime verification require full Xcode.']}
+report = {'upstream_commit': subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip(), 'dictionary_entries': len(translations), 'display_adaptations': adaptations, 'untranslated_static_candidates': found, 'limitations': ['Static SwiftUI catalog only; dynamic labels and AppKit text still require adaptation.', 'Build and runtime verification require full Xcode.']}
 (ROOT / 'translation-status.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
 print(f'Prepared {len(translations)} translations; {len(found)} untranslated static candidates. See translation-status.json.')
 if '--require-complete' in sys.argv and found: sys.exit(2)
