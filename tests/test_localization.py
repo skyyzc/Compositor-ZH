@@ -23,6 +23,17 @@ class LocalizationRegression(unittest.TestCase):
         self.assertNotIn('LayerBlendMode(rawValue: $0.title)', blend)
         self.assertIn('withTitle: compositorZh(mode.rawValue)', blend)
 
+    def test_filter_and_status_feedback(self):
+        app = self.read('CompositorApp.swift')
+        self.assertIn('compositorZh("Last Filter")', app)
+        self.assertIn('Button(compositorZh("\\(kind.rawValue)…"))', app)
+        self.assertIn('Text(compositorZh(session.tool == .marquee', self.read('ContentView.swift'))
+        self.assertIn('Text(compositorZh(session.document == nil', self.read('UI/LayersPanel.swift'))
+        self.assertIn('tab.session.projectURL == nil ?', self.read('UI/ProjectTabs.swift'))
+        terms = dict(line.split('\t') for line in (ROOT / 'translations/zh-Hans.tsv').read_text().splitlines() if line.strip())
+        for key in ['Progressive Blur', 'Bloom / Glow', 'Scanlines', 'Tonal Contrast', 'Camera Raw Filter']:
+            self.assertIn(key, terms)
+
     def test_document_models_unchanged(self):
         for original in (ROOT / 'upstream/Compositor/Document').rglob('*'):
             if original.is_file():

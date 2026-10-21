@@ -60,6 +60,23 @@ nonisolated func compositorZh(_ value: String) -> String {
     ]:
         text = text.replace('Button(' + expression + ')', 'Button(compositorZh(' + expression + '))')
     path.write_text(text)
+    text = text.replace('session.lastFilter.map { "Last Filter: " + $0.rawValue } ?? "Last Filter"', 'session.lastFilter.map { compositorZh("Last Filter") + "：" + compositorZh($0.rawValue) } ?? compositorZh("Last Filter")')
+    path.write_text(text)
+    path = output / 'Compositor/ContentView.swift'
+    text = path.read_text()
+    lines = text.splitlines()
+    for index, line in enumerate(lines):
+        if 'Text(session.tool == .marquee ?' in line:
+            lines[index] = line.replace('Text(', 'Text(compositorZh(', 1) + ')'
+    text = '\n'.join(lines) + '\n'
+    text = text.replace('else if tool == .cloneStamp', 'else if tool == .type { Text("T").font(.system(size: 17, weight: .medium)) }\n                        else if tool == .cloneStamp')
+    path.write_text(text)
+    path = output / 'Compositor/UI/LayersPanel.swift'
+    text = path.read_text().replace('Text(session.document == nil ? "Create a canvas or import an image." : "Import an image or add a blank layer.")', 'Text(compositorZh(session.document == nil ? "Create a canvas or import an image." : "Import an image or add a blank layer."))')
+    path.write_text(text)
+    path = output / 'Compositor/UI/ProjectTabs.swift'
+    text = path.read_text().replace('Text(tab.title)', 'Text(tab.session.projectURL == nil ? tab.title.replacingOccurrences(of: "Untitled", with: "未命名", options: .anchored) : tab.title)')
+    path.write_text(text)
     # Native dialog captions use String, not LocalizedStringKey.
     for path in (output / 'Compositor/IO').glob('*.swift'):
         if path.name == 'UpdateDriver.swift': continue  # Official updater is inactive.
