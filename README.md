@@ -1,8 +1,8 @@
 # Compositor 简体中文维护项目
 
-[下载最新中文预览版 2](https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.3-zh.preview.2)
+[下载最新中文预览版 3](https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.3-zh.preview.3)
 
-基于官方 1.5.3，当前 645 条词条。预览版 2 修复了首轮人工截图发现的运行时文字漏译；云端编译及 3 项定向回归通过，界面显示与实际功能等待人工截图验收。
+基于官方 1.5.3，当前 676 条词条。预览版 3 补齐滤镜名称、工具操作提示、空图层说明及未保存标签；云端编译及 4 项定向回归通过，界面显示与实际功能等待人工截图验收。
 
 目标：为本机 Compositor 提供可用的完整中文界面，并在官方更新后持续维护翻译。
 
