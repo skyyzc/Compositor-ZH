@@ -1,0 +1,49 @@
+name: Chinese preview
+on:
+  push:
+    branches: [main]
+    paths: ['scripts/**', 'translations/**', 'upstream.json', '.github/workflows/build.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: chinese-preview-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode
+        run: |
+          sudo xcode-select -s /Applications/Xcode_26.6.app
+          xcodebuild -version
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch pinned official source
+        run: python3 scripts/fetch-source.py
+      - name: Build Chinese preview
+        run: python3 scripts/build.py
+      - name: Package preview
+        run: |
+          mkdir -p dist
+          cp LICENSE 'build/Build/Products/Debug/Compositor 中文.app/Contents/Resources/UPSTREAM-LICENSE.txt'
+          codesign --force --deep --sign - 'build/Build/Products/Debug/Compositor 中文.app'
+          codesign --verify --deep --strict 'build/Build/Products/Debug/Compositor 中文.app'
+          ditto -c -k --sequesterRsrc --keepParent 'build/Build/Products/Debug/Compositor 中文.app' dist/Compositor-ZH-preview.zip
+          shasum -a 256 dist/Compositor-ZH-preview.zip > dist/SHA256SUMS.txt
+          cp translation-status.json dist/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Compositor-ZH-preview
+          path: dist/
+          retention-days: 14
+      - name: Upload translation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: translation-report
+          path: translation-status.json
+          if-no-files-found: ignore

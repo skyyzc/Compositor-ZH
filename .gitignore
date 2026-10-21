@@ -1,0 +1,7 @@
+/upstream/
+/build-source/
+/build/
+/dist/
+/translation-status.json
+__pycache__/
+.DS_Store
