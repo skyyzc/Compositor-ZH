@@ -41,3 +41,14 @@ PRIMARY_GOAL：完整汉化本机 Compositor，并持续跟随官方更新维护
 - 根因：运行时 String 绕过 SwiftUI 字面量本地化；已新增 display-boundary 适配器并补充词库至 645 条。
 - 已加入共用 Text(title)、枚举选择标签、选区按钮、原生对话框的显示翻译；混合模式使用 representedObject 保留原始英文标识。
 - 定向回归 3 项通过：截图对应控件接入、混合模式标识分离、Document 模型文件逐字节未变；相关 Swift 文件语法解析通过。云端编译及用户截图验收待完成。
+
+## 最新交付：preview.2（2026-10-21）
+
+- 当前可下载预览：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.3-zh.preview.2
+- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.5.3-zh.preview.2/Compositor-ZH-1.5.3-preview.2.zip
+- 代码提交 877a5305b83d5b8b3df2327ea30a4b856fc3f099，云端构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/39537038012 为 success；3 项回归通过。
+- 产物 SHA256 7f5469b7b143f8245140cd6735fa367a7abbd9d99467d26705ba99d8536624a7，下载后与云端及 GitHub Release digest 一致，asset 状态 uploaded。
+- 修复的运行时标签已构建，状态 IMPLEMENTED_NOT_VERIFIED（UI 仍需用户截图）；不要声称截图中的英语已被实际界面验证消除。
+- 本轮没有操作用户桌面、启动应用或自动截图。
+- 持续任务 automationId=compositor，ACTIVE，每天上海时间 10:00 返回当前聊天，检查正式发行版并按既有项目进行翻译、回归和云端构建；无变化不通知，禁止桌面操作，待用户截图验收的版本仅作为预览。任务涉及本地文件时需电脑开机且桌面应用运行。
+- NEXT：用户退出旧中文版并运行 preview.2 后提供同一界面截图，核对宽高、背景/单位、选框工具栏是否消除英文；继续修复剩余动态界面，按实际反馈迭代。整体仍 PARTIAL。
