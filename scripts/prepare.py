@@ -26,9 +26,17 @@ if text.count(needle) != 1:
     raise SystemExit('Upstream updater changed; review required before building.')
 text = text.replace(needle, '// Chinese edition updates are built by the external update script.')
 delegate.write_text(text)
+app_source = output / 'Compositor/CompositorApp.swift'
+app_text = app_source.read_text()
+update_button = 'Button("Check for Updates…") { applicationDelegate.updater.checkForUpdates() }'
+if app_text.count(update_button) != 1:
+    raise SystemExit('Upstream update menu changed; review required.')
+app_text = app_text.replace(update_button, 'Button("中文版下载与更新…") { NSWorkspace.shared.open(URL(string: "https://github.com/skyyzc/Compositor-ZH/actions/workflows/build.yml")!) }')
+app_source.write_text(app_text)
 # Only isolate app identity; never translate enum raw values / serialization strings.
 project = output / 'Compositor.xcodeproj/project.pbxproj'
 text = project.read_text().replace('PRODUCT_BUNDLE_IDENTIFIER = com.wonderassembly.compositor;', 'PRODUCT_BUNDLE_IDENTIFIER = local.compositor.zh;')
+text = text.replace('STRING_CATALOG_GENERATE_SYMBOLS = YES;', 'STRING_CATALOG_GENERATE_SYMBOLS = NO;')
 text = text.replace('PRODUCT_NAME = "$(TARGET_NAME)";', 'PRODUCT_NAME = "Compositor 中文";')
 project.write_text(text)
 # Discover conservative static UI candidates; dynamic strings require a separate review.
