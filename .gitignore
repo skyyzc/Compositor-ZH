@@ -5,3 +5,4 @@
 /translation-status.json
 __pycache__/
 .DS_Store
+/upstream-status.json

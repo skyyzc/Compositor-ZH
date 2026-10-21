@@ -2,39 +2,34 @@
 
 PRIMARY_GOAL：完整汉化本机 Compositor，并持续跟随官方更新维护汉化。
 
-整体状态：PARTIAL；已采用 GitHub 云端构建，本机缺少 Xcode 不再是必要阻塞。云端构建和运行尚待验证。
+整体状态：PARTIAL。GitHub 云端构建路线 VERIFIED；UI 与功能验收尚未完成。
 
-## VERIFIED
+## 已验证基线
 
-- 安装路径 `/Applications/Compositor.app`；版本 1.5.3 / build 49；arm64 原生 SwiftUI/AppKit 应用。
-- 安装包 Resources 没有现成 `.lproj` / `.strings` 语言资源，不能靠切换系统语言完成汉化。
-- 官方源码 MIT 开源，目前 README 明确只支持英文且不接受翻译 PR。
-- 官方源码快照 `365b5745eda537f984f3d5bed1e53c361dbc9c91`，与 1.5.3 发布对应。
-- 本机仅 `/Library/Developer/CommandLineTools`，无完整 Xcode。
-- `scripts/prepare.py` 已运行，生成 287 条去重词条的字符串目录，发现 300 条未译静态候选。
-- 原安装未修改；没有安装后台任务。
+- 原安装 `/Applications/Compositor.app`：1.5.3 / build 49，未修改。
+- 原生 SwiftUI/AppKit；官方无现成语言包，源码 MIT 开源，暂不接受翻译 PR。
+- 固定官方提交 `365b5745eda537f984f3d5bed1e53c361dbc9c91`，配置在 upstream.json。
+- 用户选择第三种路线：GitHub 管理源码并云端构建，本机无需 Xcode；明确授权公开仓库。
+- GitHub 连接及 CLI 登录账号均为 skyyzc。仓库 https://github.com/skyyzc/Compositor-ZH。
+- 已上传 587 条去重中文词条；当前保守扫描的静态 UI 候选未译数 0。不是完整 UI 覆盖率。
+- 云端构建提交 `860ef930cdec0fd2f1bdc646c402bb24d229ca47`：https://github.com/skyyzc/Compositor-ZH/actions/runs/39535444061，结论 success。
+- macos-26 / Xcode 26.6 / Python 3.12 已成功构建、临时签名和打包；本机也通过 codesign --verify --deep --strict。
+- ZIP SHA256：b64af90ca33273453f2594e6ff4ba97f685d963ddd9c42b1e298f6b3656882ff，与云端清单一致。
+- 产物：dist/Compositor-ZH-preview.zip；解压应用 dist/preview/Compositor 中文.app。
+- 系统启动请求成功，CUA 应用清单确认 local.compositor.zh isRunning=true。
+- 官方最新正式发行版查询仍为 v1.5.3；scripts/update.py 已执行验证，不改变固定源提交。
 
-## IMPLEMENTED_NOT_VERIFIED
+## IMPLEMENTED_NOT_VERIFIED / 缺口
 
-- 独立 TSV 词库、可重复生成源码与字符串目录、独立 Bundle ID / 产品名。
-- 生成时停用官方更新器启动，定位不匹配时终止。
-- 构建预览、本地签名、显式跟进官方 main 的脚本。
-
-## 缺口
-
-- 至少 300 条静态候选未翻译；动态字符串、AppKit 控件、撤销历史、命令搜索显示名需要定向适配。
-- 禁止直接改枚举 rawValue；部分混合模式控件会把显示标题转回枚举，需将标识与显示分离。
-- 尚未构建或启动汉化版本；菜单、布局、保存/加载、快捷键、图像处理、导出均未验收。
-- 自动检测正式版本、翻译新增内容、保留旧版/回退和后台更新机制尚未完成。
-- “检查更新”菜单应替换为中文版维护入口，当前生成版停用其 updater 启动但菜单仍在。
-
-## GitHub 路线
-
-- 用户已授权公开仓库；账号 skyyzc。
-- 仓库 https://github.com/skyyzc/Compositor-ZH 已创建。
-- 已准备固定源提交的云端构建流程，上传前通过 Python 语法检查及 Xcode 项目 plist 语法检查。
-- 没有 Apple 开发者签名/公证；预览采用临时签名。
+- 原生字符串目录已打包，中文资源存在；动态文字与 AppKit 控件尚待完整适配。
+- CUA getApp(local.compositor.zh) 连续超时（42 秒、60 秒）；无法读取窗口树或截图，因此不能声称中文 UI、布局及功能 VERIFIED。
+- 第一次在沙盒内 open 返回 -10827，直接执行返回 134；改为获批的桌面 open 后成功，应用清单确认运行。不要将沙盒启动失败推断为构建产物损坏。
+- 预览用独立 Bundle ID / 产品名；官方更新器启动已停用，更新菜单改为打开本仓库 Actions。
+- 未经 Apple Developer ID 签名与公证；仅预览产物。
+- 混合模式等控件用显示标题转回枚举，后续需将标识与译名分离；不得改枚举 rawValue / 存储格式。
+- 保存/加载、快捷键、图像处理、导出均未验收。
+- 后台监控、自动翻译新增文字、正式发行及自动安装/回退机制尚未完成。
 
 ## NEXT
 
-上传并跑通 GitHub Actions，修复构建问题，继续翻译及动态 UI / AppKit 适配；下载产物后在本机运行验收。完成首版后完善正式发行跟进和中文更新流程。不得把预览报告为完整汉化。
+优先取得实际窗口证据（CUA 若持续超时需用户确认窗口状态），适配动态 UI / AppKit 并进行新建、导入、保存、重开、导出和快捷键验收。首个可用版本通过后，再接入正式版本自动跟进与安全更新。云端构建成功不等于完整汉化完成。

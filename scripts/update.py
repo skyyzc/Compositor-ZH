@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Explicitly check upstream, rebuild localization, and report new translation work."""
-import pathlib, subprocess, sys
+"""Check the latest official release without changing the pinned build source."""
+import json, pathlib, urllib.request
 root = pathlib.Path(__file__).resolve().parents[1]
-# Updating is explicit. No background installation or replacement of a running app.
-subprocess.run(['git', '-C', str(root / 'upstream'), 'fetch', '--depth', '1', 'origin', 'main'], check=True)
-subprocess.run(['git', '-C', str(root / 'upstream'), 'checkout', '--detach', 'FETCH_HEAD'], check=True)
-subprocess.run([sys.executable, str(root / 'scripts/prepare.py'), '--require-complete'], check=True)
-print('静态候选翻译检查通过；动态界面、构建和运行仍需验证。')
+current = json.loads((root / 'upstream.json').read_text())
+request = urllib.request.Request('https://api.github.com/repos/robbietilton/Compositor/releases/latest', headers={'Accept': 'application/vnd.github+json', 'User-Agent': 'Compositor-ZH'})
+with urllib.request.urlopen(request, timeout=30) as response:
+    release = json.load(response)
+report = {'current_version': current['version'], 'latest_version': release['tag_name'].removeprefix('v'), 'url': release['html_url']}
+report['update_available'] = report['current_version'] != report['latest_version']
+(root / 'upstream-status.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
+print(json.dumps(report, ensure_ascii=False, indent=2))
+if report['update_available']:
+    print('发现新版本；固定源版本保持不变，需检查翻译差异并验证后再升级。')
