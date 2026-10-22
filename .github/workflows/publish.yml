@@ -24,3 +24,13 @@ jobs:
           RELEASE_TAG: ${{ inputs.tag }}
         run: |
           python3 scripts/publish-preview.py
+      - name: Preserve packaged preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-package
+          path: |
+            dist/Compositor-ZH-*-preview.*.zip
+            dist/SHA256SUMS.txt
+          if-no-files-found: ignore
+          retention-days: 14

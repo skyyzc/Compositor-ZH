@@ -44,5 +44,6 @@ checksums = root / 'dist/SHA256SUMS.txt'
 checksums.write_text(f'{digest}  {output.name}\n')
 print('Release SHA256:', digest, flush=True)
 notes = root / 'release-notes.md'
-command('gh', 'release', 'create', tag, str(output), str(checksums), '--repo', repo,
-        '--target', metadata['head_sha'], '--prerelease', '--title', f'Compositor {version} 中文预览版 {preview}', '--notes-file', str(notes))
+# Release records are created with the user's authorized GitHub connection.
+# The workflow token uploads verified assets without needing to create tags.
+command('gh', 'release', 'upload', tag, str(output), str(checksums), '--repo', repo)
