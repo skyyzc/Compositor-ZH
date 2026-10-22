@@ -34,6 +34,18 @@ class LocalizationRegression(unittest.TestCase):
         for key in ['Progressive Blur', 'Bloom / Glow', 'Scanlines', 'Tonal Contrast', 'Camera Raw Filter']:
             self.assertIn(key, terms)
 
+    def test_new_release_display_boundaries(self):
+        export = self.read('UI/ExportAsSheet.swift')
+        self.assertIn('Picker(compositorZh(channel.rawValue),', export)
+        self.assertIn('Text(layer.name).tag(ChannelPack.Source.layer(layer.id))', export)
+        self.assertIn('Text(compositorZh(format == .channelPack ?', export)
+        self.assertIn('compositorZh("Search Fonts")', self.read('UI/FontListPanel.swift'))
+        self.assertIn('Button(compositorZh(kind.rawValue + "…"))', self.read('CompositorApp.swift'))
+        project = (ROOT / 'build-source/Compositor.xcodeproj/project.pbxproj').read_text()
+        self.assertIn('PRODUCT_MODULE_NAME = Compositor;', project)
+        self.assertIn('PRODUCT_BUNDLE_IDENTIFIER = com.wonderassembly.compositor.tests;', project)
+        self.assertEqual(project.count('PRODUCT_NAME = "Compositor 中文";'), 2)
+
     def test_document_models_unchanged(self):
         for original in (ROOT / 'upstream/Compositor/Document').rglob('*'):
             if original.is_file():

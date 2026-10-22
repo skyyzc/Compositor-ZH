@@ -72,11 +72,29 @@ nonisolated func compositorZh(_ value: String) -> String {
     text = text.replace('else if tool == .cloneStamp', 'else if tool == .type { Text("T").font(.system(size: 17, weight: .medium)) }\n                        else if tool == .cloneStamp')
     path.write_text(text)
     path = output / 'Compositor/UI/LayersPanel.swift'
-    text = path.read_text().replace('Text(session.document == nil ? "Create a canvas or import an image." : "Import an image or add a blank layer.")', 'Text(compositorZh(session.document == nil ? "Create a canvas or import an image." : "Import an image or add a blank layer."))')
+    text = re.sub(r'Text\((session.document == nil \? "[^"\n]+" : "[^"\n]+")\)', r'Text(compositorZh(\1))', path.read_text())
     path.write_text(text)
     path = output / 'Compositor/UI/ProjectTabs.swift'
     text = path.read_text().replace('Text(tab.title)', 'Text(tab.session.projectURL == nil ? tab.title.replacingOccurrences(of: "Untitled", with: "未命名", options: .anchored) : tab.title)')
     path.write_text(text)
+    # 1.5.5: new adjustment menus and channel-pack UI have dynamic labels.
+    path = output / 'Compositor/CompositorApp.swift'
+    text = path.read_text().replace('Button(kind.rawValue + "…")', 'Button(compositorZh(kind.rawValue + "…"))')
+    path.write_text(text)
+    path = output / 'Compositor/UI/ExportAsSheet.swift'
+    text = path.read_text()
+    text = text.replace('Picker(channel.rawValue,', 'Picker(compositorZh(channel.rawValue),')
+    text = text.replace('Text(format == .channelPack ?', 'Text(compositorZh(format == .channelPack ?')
+    text = text.replace(': "sRGB")', ': "sRGB"))')
+    text = text.replace('"CMYK – \\(profile?.name ?? "No profile")"', '"CMYK – \\(profile?.name ?? "无配置文件")"')
+    text = text.replace('What fills the \\(channel.rawValue.lowercased()) channel: a layer or group read as grayscale, or solid black or white', '\\(compositorZh(channel.rawValue))通道的内容：按灰度读取的图层或组，或纯黑、纯白')
+    text = text.replace('Other formats: TIFF and PDF\\(others.contains(.exr) ? ", EXR to keep light brighter than white" : ""), and Channel Pack for game textures', '其他格式：TIFF、PDF\\(others.contains(.exr) ? "、保留超白亮度的 EXR" : "")，以及用于游戏纹理的通道打包')
+    path.write_text(text)
+    path = output / 'Compositor/UI/FontListPanel.swift'
+    if path.exists():
+        text = path.read_text().replace('search.placeholderString = "Search Fonts"', 'search.placeholderString = compositorZh("Search Fonts")')
+        text = text.replace('accessibilityDescription: "Clear search"', 'accessibilityDescription: compositorZh("Clear search")')
+        path.write_text(text)
     # Native dialog captions use String, not LocalizedStringKey.
     for path in (output / 'Compositor/IO').glob('*.swift'):
         if path.name == 'UpdateDriver.swift': continue  # Official updater is inactive.

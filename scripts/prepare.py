@@ -37,7 +37,8 @@ app_source.write_text(app_text)
 project = output / 'Compositor.xcodeproj/project.pbxproj'
 text = project.read_text().replace('PRODUCT_BUNDLE_IDENTIFIER = com.wonderassembly.compositor;', 'PRODUCT_BUNDLE_IDENTIFIER = local.compositor.zh;')
 text = text.replace('STRING_CATALOG_GENERATE_SYMBOLS = YES;', 'STRING_CATALOG_GENERATE_SYMBOLS = NO;')
-text = text.replace('PRODUCT_NAME = "$(TARGET_NAME)";', 'PRODUCT_NAME = "Compositor 中文";')
+text = text.replace('PRODUCT_BUNDLE_IDENTIFIER = local.compositor.zh;\n\t\t\t\tPRODUCT_NAME = "$(TARGET_NAME)";', 'PRODUCT_BUNDLE_IDENTIFIER = local.compositor.zh;\n\t\t\t\tPRODUCT_MODULE_NAME = Compositor;\n\t\t\t\tPRODUCT_NAME = "Compositor 中文";')
+text = text.replace('$(BUILT_PRODUCTS_DIR)/Compositor.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Compositor', '$(BUILT_PRODUCTS_DIR)/Compositor 中文.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Compositor 中文')
 project.write_text(text)
 from adapt import apply
 adaptations = apply(output)

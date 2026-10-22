@@ -28,6 +28,24 @@ jobs:
         run: python3 -m unittest discover -s tests
       - name: Build Chinese preview
         run: python3 scripts/build.py
+      - name: Run affected upstream unit suites on localized app
+        run: >
+          xcodebuild test
+          -project build-source/Compositor.xcodeproj
+          -scheme Compositor
+          -destination 'platform=macOS,arch=arm64'
+          -configuration Debug
+          -derivedDataPath build
+          -resultBundlePath dist/Regression.xcresult
+          CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM=
+          GCC_OPTIMIZATION_LEVEL=s SWIFT_OPTIMIZATION_LEVEL=-O
+          -only-testing:CompositorTests/ChannelPackTests
+          -only-testing:CompositorTests/FontMenuFacesTests
+          -only-testing:CompositorTests/KeyboardShortcutTests
+          -only-testing:CompositorTests/ShapeToolTests
+          -only-testing:CompositorTests/PSDArtboardTests
+          -only-testing:CompositorTests/FilterLayerTests
+          -only-testing:CompositorTests/FilterTests
       - name: Package preview
         run: |
           mkdir -p dist
@@ -40,7 +58,10 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Compositor-ZH-preview
-          path: dist/
+          path: |
+            dist/*.zip
+            dist/*.txt
+            dist/*.json
           retention-days: 14
       - name: Upload translation report
         if: always()
@@ -49,3 +70,11 @@ jobs:
           name: translation-report
           path: translation-status.json
           if-no-files-found: ignore
+      - name: Upload regression evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-results
+          path: dist/Regression.xcresult
+          if-no-files-found: ignore
+          retention-days: 14
