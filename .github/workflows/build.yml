@@ -35,7 +35,7 @@ jobs:
           -scheme Compositor
           -destination 'platform=macOS,arch=arm64'
           -configuration Debug
-          -derivedDataPath build
+          -derivedDataPath build-regression
           -resultBundlePath dist/Regression.xcresult
           CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM=
           GCC_OPTIMIZATION_LEVEL=s SWIFT_OPTIMIZATION_LEVEL=-O

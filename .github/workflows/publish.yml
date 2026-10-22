@@ -1,0 +1,26 @@
+name: Publish verified preview
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful Chinese preview build run ID
+        required: true
+      tag:
+        description: Preview tag (e.g. v1.5.5-zh.preview.1)
+        required: true
+permissions:
+  actions: read
+  contents: write
+jobs:
+  publish:
+    runs-on: macos-26
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch verified build and prepare publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUILD_RUN: ${{ inputs.run_id }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          python3 scripts/publish-preview.py
