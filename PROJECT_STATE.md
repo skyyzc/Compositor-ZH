@@ -11,7 +11,7 @@ PRIMARY_GOAL：提供完整可用的简体中文版，持续随官方正式版�
 ## SSOT 与基线
 
 - 仓库 https://github.com/skyyzc/Compositor-ZH；GitHub 及 CLI 账号 skyyzc。
-- 当前官方源配置 upstream.json：1.5.5，提交 b31ea029762ecb782699df971e1412168602a44d；最近已发布汉化为 1.5.5 preview.1。
+- 当前官方源配置 upstream.json：1.5.7，提交 9537736da6c324b948cdcba24adf74760498ea14；最近已发布汉化仍为 1.5.5 preview.1。
 - 原安装 /Applications/Compositor.app 未修改；独立预览 Bundle ID local.compositor.zh。
 - 本机无需 Xcode。GitHub macos-26 / Xcode 26.6 / Python 3.12 构建。
 - translations/zh-Hans.tsv 是独立词库；scripts/prepare.py + adapt.py 生成 build-source。
@@ -74,3 +74,12 @@ ZIP SHA256 aefd8ff27ab1604229b464ccea7c034f4c327bf45a49a1436ce3890db5dad752，�
 - 初版云端 Release 创建遭 GITHUB_TOKEN 403；改用用户已授权 CLI 创建 tag/Release 记录，再由云端上传资产，已验证可行。未来发布：先确认代码 build run success；使用 gh 用户连接创建准确 SHA 的 tag 和预览 Release；将 release-notes.md 更新为本次说明；运行 publish.yml 输入 run_id 和 tag。不要把用户令牌上传为仓库秘密。
 - .github/workflows/build.yml 的上游测试改用 build-regression 派生目录，避免未来混入分发 app；发布脚本仍清理 .xctest 并验签。UI 和实机压感体验未验收，整体 PARTIAL。
 - 未跟踪的 default.profraw 为旧会话遗留，不属于汉化源码，未改动或提交。
+
+## 当前工作 2026-10-24：官方 1.5.7 迁移
+
+- 官方 v1.5.7 于 2026-10-23 18:06:46 UTC 发布，固定源 9537736da6c324b948cdcba24adf74760498ea14。
+- 跟进镜头效果、GIF 时间轴及导出、图层搜索/筛选；工具栏移至 ToolRail.swift，T 图标适配随之迁移。新增 72 条词条，总计 778 条；保守静态候选未译 0，不代表完整 UI 覆盖率。
+- 本地 7 项回归和新增界面 Swift 语法解析通过。文档模型仍与对应官方源逐字节一致。新增上游 GIFLayerTests、GIFPreviewPlaybackTests、LensEffectsTests、ToolRailTests、GroupTests；GIFLayerTests 包含项目保存/读取回归。
+- 上游项目格式升至 17；新版保存的 v17 文件会被旧版拒绝读取，发布说明需保留项目副本提醒，不擅自修改兼容逻辑。
+- 首轮构建 40052542437 捕获上游空状态标题改为 LocalizedStringKey 后的适配类型冲突，已修复并新增原生键保留回归。当前代码 8a921f53cae4822d162ea30cd19200fc8ec36f48；构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40052754864，结论 success，7 项本地化边界检查和 81 项相关上游单元测试通过，准备云端发布 1.5.7。
+- NEXT：成功后通过用户 GitHub 连接创建 tag/预览 Release，再调 publish.yml 云端校验发布。不得重复本机下载，不操作桌面；新 UI/真实体验仍须用户截图验收。
