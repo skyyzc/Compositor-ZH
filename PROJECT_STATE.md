@@ -1,85 +1,49 @@
 # Compositor 汉化：当前状态
 
-PRIMARY_GOAL：提供完整可用的简体中文版，持续随官方正式版本维护。
-整体状态 PARTIAL；云端构建路线已跑通，界面和功能采用用户截图/人工验收。
+PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版本。
+整体 PARTIAL：代码/构建/相关回归已验证；完整 UI 与实际体验仍须用户截图、人工操作验收。
 
-## 执行边界
+## 授权及边界
 
-用户已授权公开 GitHub 仓库、代码修改、云端构建和预览交付。禁止操作用户桌面/应用：不得 CUA、open、模拟输入、自动截图、启动或安装程序。用户人工提供截图。
-不要改文档格式、模型枚举 rawValue 或用户文件名；只翻译显示边界。构建通过不等于 UI 或编辑功能 VERIFIED。
+- 用户授权公开仓库 skyyzc/Compositor-ZH、代码修改、云端构建及预览交付。GitHub 连接和 CLI 账号均 skyyzc。
+- 不得操作用户桌面或应用：禁止 CUA、open、模拟输入、自动截图、启动/安装程序。仅依据用户主动提供的截图验收。
+- 不覆盖 /Applications/Compositor.app；中文预览为独立 local.compositor.zh。
+- 只翻译显示边界；不改文档模型、枚举 rawValue、快捷键/功能标识、用户文件名或图层名。构建成功不等于完整目标 VERIFIED。
 
-## SSOT 与基线
+## 当前基线及交付（2026-10-24）
 
-- 仓库 https://github.com/skyyzc/Compositor-ZH；GitHub 及 CLI 账号 skyyzc。
-- 当前官方源配置 upstream.json：1.5.7，提交 9537736da6c324b948cdcba24adf74760498ea14；最近已发布汉化仍为 1.5.5 preview.1。
-- 原安装 /Applications/Compositor.app 未修改；独立预览 Bundle ID local.compositor.zh。
-- 本机无需 Xcode。GitHub macos-26 / Xcode 26.6 / Python 3.12 构建。
-- translations/zh-Hans.tsv 是独立词库；scripts/prepare.py + adapt.py 生成 build-source。
-- Document 模型文件保持字节不变（回归验证）。混合模式菜单用 representedObject 保存原始标识，显示译名独立。
-- 官方更新器已停用；更新菜单链接项目 Actions。尚未实现自动安装及回退。
-- 临时签名，无 Developer ID 签名或 Apple 公证。用户截图证实 Gatekeeper 拦截；已提供 Apple 官方手动确认步骤，不能宣称软件通过 Apple 安全认证。
+- 仓库 https://github.com/skyyzc/Compositor-ZH。
+- upstream.json 固定官方 1.5.7，提交 9537736da6c324b948cdcba24adf74760498ea14；官方发布时间 2026-10-23 18:06:46 UTC。
+- 汉化代码提交 8a921f53cae4822d162ea30cd19200fc8ec36f48；778 条去重词条，保守静态缺词候选 0，不代表完整 UI 覆盖率。
+- 最新预览：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.7-zh.preview.1
+- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.5.7-zh.preview.1/Compositor-ZH-1.5.7-preview.1.zip
+- Release asset uploaded，12,284,378 字节；SHA256 2cf61c029b76b340240d8631a60f96cf805cb8117b1d22e4a148aaba8bf28f3e。Release 同时有 SHA256SUMS.txt。
+- 构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40052754864 success；7 项本地化边界回归及 81 项相关上游测试通过。相关测试含 GIF 保存/重开、播放时序、镜头效果、工具栏、图层、通道打包、字体菜单、快捷键、形状、PSD 画板和滤镜。
+- 发布 https://github.com/skyyzc/Compositor-ZH/actions/runs/40053341425 success：原始 ZIP 校验，app 版本/标识检查，测试包清理，临时签名及完整性检查，打包上传。
+- 上游项目格式已升至 17；旧版可能拒绝新版保存的项目。预览测试使用项目副本，不修改官方兼容逻辑。
+- 上一预览 1.5.5：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.5-zh.preview.1，保留用于回退。
 
-## 人工截图 Ground Truth
+## 实现与证据边界
 
-1. 第一版菜单中文，但 Width/Height、画布类型、工具栏仍英文。
-2. preview.2 截图确认宽度/高度、透明画布、像素、混合模式正常等显示中文，程序可打开。
-3. preview.2 截图仍有 Last Filter、Progressive Blur、Bloom / Glow、Scanlines、Tonal Contrast、Camera Raw Filter、空图层提示、文字工具底部说明、Untitled 标签英文。
-4. 左侧“格式”是 SF Symbol 的文字工具图标显示，不是形状工具标题；当前改为 T 图标，待截图验收。
-5. 保存/加载、图像编辑、快捷键及导出未获得人工验收。
+- TSV 词库为 translations/zh-Hans.tsv；prepare.py + adapt.py 从固定官方快照生成 build-source。
+- 当前官方 Document 模型与生成副本逐字节一致；混合模式用 representedObject 保留英文标识，仅显示译名。
+- 1.5.7 跟进镜头效果、GIF 时间轴/导出、图层搜索/筛选；工具栏移至 ToolRail.swift，T 图标随迁移适配。
+- 首轮构建 40052542437 因上游标题改用 LocalizedStringKey 暴露旧适配器类型冲突；已修复，原生键不经 String 适配，并加入回归。不得回退为盲目包装所有 Text(title)。
+- 用户此前截图确认程序可打开、菜单及新建画布宽高/单位中文生效；其余最新界面、编辑/导出体验没有新人工证据。不得将 81 项单元测试视为完整 UI 验收。
+- 仅临时签名，无 Apple Developer ID 签名或公证。用户截图曾证实 Gatekeeper 拦截，已给出 Apple 官方手动确认说明；不能声称通过 Apple 安全认证。
+- 官方更新器启动停用；更新菜单链接项目 Actions。尚无自动安装或回退机制。
 
-## 上一轮交付：1.5.3 preview.3
+## 云端构建与发布
 
-- 代码提交 830d6996b9c9b88ecb11d192f5dad5e3e29b8ca9。
-- 补齐上述滤镜名称，接入上次滤镜菜单、空图层提示及所有工具的底部操作说明。
-- 未保存标签显示“未命名”；已保存文件名保持原样。
-- 词库 676 条；保守静态候选缺词 0，不代表完整 UI 覆盖率。
-- 本地 4 项定向回归和相关 Swift 语法解析通过。
-- 云端构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/39537870102，结论 success；构建、4 项回归、打包通过。
+- macos-26 / Xcode 26.6 / Python 3.12；本机不需要完整 Xcode。
+- 上游回归使用 build-regression，分发应用使用 build，避免测试包混入。publish-preview.py 仍清理 .xctest 并验签。
+- 更新 release-notes.md 后，先确认 Chinese preview 构建成功；通过用户授权的 gh 连接创建指向构建 SHA 的 tag 和预览 Release；再调 publish.yml，输入 run_id 与 tag，云端校验并上传。
+- GITHUB_TOKEN 创建 Release 曾遭 403；已验证使用用户连接创建发行记录、云端仅上传资产可行。不得把用户令牌上传为仓库秘密。
+- 本机下载曾多次 TLS 超时；使用云端发布，避免下载后再上传。不要因下载问题修改网络或安全设置。
 
-## 已发布的上一版
+## 持续任务及 NEXT
 
-preview.2：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.3-zh.preview.2
-成功构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/39537038012。
-
-## 持续维护
-
-automationId=compositor，ACTIVE；每天上海时间 10:00 回到此聊天检查官方正式发行版，无变化保持安静，有新版继续翻译/回归/云端构建，仅在新产物、实质失败或用户操作必需时通知。禁止桌面操作。涉及本地文件时需电脑及 Codex 保持运行。未验收版本只发布预览。
-
-## NEXT
-
-1.5.5 preview.1 已云端校验发布，待用户截图验收；随后按截图继续适配其余界面。保留验证边界，不把词库规模或构建通过当作完整目标已完成。
-
-## preview.3 已交付
-
-https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.3-zh.preview.3
-ZIP SHA256 aefd8ff27ab1604229b464ccea7c034f4c327bf45a49a1436ce3890db5dad752，与下载产物和 Release digest 一致，asset uploaded。本轮无桌面/应用操作。修复实现和构建验证完成，视觉结果待用户截图。
-
-## 持续维护 2026-10-22：官方 1.5.5
-
-- 检出官方 v1.5.5（发布于 2026-10-21 22:09:13 UTC）；固定源 b31ea029762ecb782699df971e1412168602a44d。
-- 新增 RGB 分离、通道打包、字体搜索、线型和压感相关译文；总计 706 条，静态候选缺词 0。
-- 回归发现上游将空图层说明 image 改为 file 导致精确替换失效，已定向修复；5 项本地化边界回归通过。
-- 修正生成项目的产品名替换范围：仅 app 两个配置更名，保留测试 target 名称；固定 app module Compositor 并更新 TEST_HOST，使上游单元测试可针对中文版构建。
-- 上游格式从 14 升至 16；不修改或降级其模型逻辑。新版保存的 v16 项目不能用旧版读取，预览说明必须提醒使用副本。
-- 代码提交 1ec600b07fd0df15eda5efac2bf4564704133e35，云端构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/39709639138，结论 success；5 项本地化边界回归及 44 项相关上游单元测试通过。
-- 不操作用户桌面、不启动/安装本机应用。原版和已发布 1.5.3 预览保持不变；UI 仍须人工截图验收。
-
-## 当前交付：1.5.5 preview.1（2026-10-22）
-
-- https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.5-zh.preview.1
-- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.5.5-zh.preview.1/Compositor-ZH-1.5.5-preview.1.zip
-- Release asset uploaded，19,186,912 字节；SHA256 6b27fb2b0fb637df826918f7a88cf450900a4c3a843ac8ef82db9b2c8b91a6f9。
-- 发布流程 https://github.com/skyyzc/Compositor-ZH/actions/runs/39711636697 success：校验原始构建 ZIP、检查 app 版本/标识、清理测试附带的 .xctest、重新临时签名并验证、打包上传 Release。
-- 本机 GitHub 产物下载多次 TLS 超时，已改为纯云端校验发布；没有为此更改网络/安全设置。
-- 初版云端 Release 创建遭 GITHUB_TOKEN 403；改用用户已授权 CLI 创建 tag/Release 记录，再由云端上传资产，已验证可行。未来发布：先确认代码 build run success；使用 gh 用户连接创建准确 SHA 的 tag 和预览 Release；将 release-notes.md 更新为本次说明；运行 publish.yml 输入 run_id 和 tag。不要把用户令牌上传为仓库秘密。
-- .github/workflows/build.yml 的上游测试改用 build-regression 派生目录，避免未来混入分发 app；发布脚本仍清理 .xctest 并验签。UI 和实机压感体验未验收，整体 PARTIAL。
-- 未跟踪的 default.profraw 为旧会话遗留，不属于汉化源码，未改动或提交。
-
-## 当前工作 2026-10-24：官方 1.5.7 迁移
-
-- 官方 v1.5.7 于 2026-10-23 18:06:46 UTC 发布，固定源 9537736da6c324b948cdcba24adf74760498ea14。
-- 跟进镜头效果、GIF 时间轴及导出、图层搜索/筛选；工具栏移至 ToolRail.swift，T 图标适配随之迁移。新增 72 条词条，总计 778 条；保守静态候选未译 0，不代表完整 UI 覆盖率。
-- 本地 7 项回归和新增界面 Swift 语法解析通过。文档模型仍与对应官方源逐字节一致。新增上游 GIFLayerTests、GIFPreviewPlaybackTests、LensEffectsTests、ToolRailTests、GroupTests；GIFLayerTests 包含项目保存/读取回归。
-- 上游项目格式升至 17；新版保存的 v17 文件会被旧版拒绝读取，发布说明需保留项目副本提醒，不擅自修改兼容逻辑。
-- 首轮构建 40052542437 捕获上游空状态标题改为 LocalizedStringKey 后的适配类型冲突，已修复并新增原生键保留回归。当前代码 8a921f53cae4822d162ea30cd19200fc8ec36f48；构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40052754864，结论 success，7 项本地化边界检查和 81 项相关上游单元测试通过，准备云端发布 1.5.7。
-- NEXT：成功后通过用户 GitHub 连接创建 tag/预览 Release，再调 publish.yml 云端校验发布。不得重复本机下载，不操作桌面；新 UI/真实体验仍须用户截图验收。
+- automationId=compositor，ACTIVE，每天上海时间 10:00 返回本聊天检查官方正式发行版；版本及待处理状态无变化则保持安静，不重复构建/通知。
+- 新版本出现则继续翻译、定向回归和云端构建，仅在新产物、实质失败或必须用户操作时通知。未截图验收的版本仅发布预览；禁止自动替换用户已验收版本。
+- 任务涉及本地文件时需电脑开机、Codex 运行。
+- NEXT：等待用户对 1.5.7 镜头效果、GIF 时间轴/导出、图层搜索等界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
