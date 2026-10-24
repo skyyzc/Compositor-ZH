@@ -54,6 +54,12 @@ class LocalizationRegression(unittest.TestCase):
         self.assertIn('Text(layer.name).tag(ChannelPack.Source.layer(layer.id))', self.read('UI/ExportAsSheet.swift'))
         self.assertIn('Text(compositorZh($0.rawValue)).tag($0)', self.read('UI/FilterSheet.swift'))
 
+    def test_native_localized_keys_remain_native(self):
+        panel = self.read('UI/LayersPanel.swift')
+        self.assertIn('let title: LocalizedStringKey', panel)
+        self.assertIn('Text(title).font(.callout.weight(.medium))', panel)
+        self.assertNotIn('Text(compositorZh(title))', panel)
+
     def test_document_models_unchanged(self):
         for original in (ROOT / 'upstream/Compositor/Document').rglob('*'):
             if original.is_file():

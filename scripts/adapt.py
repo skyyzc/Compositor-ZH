@@ -24,8 +24,10 @@ nonisolated func compositorZh(_ value: String) -> String {
         original = text = path.read_text()
         # Enum values are translated only at rendering; Picker tags remain their original types.
         text = re.sub(r'Text\(([^()\n]*\.rawValue)\)', r'Text(compositorZh(\1))', text)
+        text = re.sub(r'Button\(([^()\n]*\.rawValue)\)', r'Button(compositorZh(\1))', text)
         # These exact helper arguments are fixed UI captions, not document / layer names.
-        text = text.replace('Text(title)', 'Text(compositorZh(title))')
+        if not re.search(r'(?:let|var) title:\s*LocalizedStringKey', text):
+            text = text.replace('Text(title)', 'Text(compositorZh(title))')
         if path.name in {'TransformInspector.swift', 'ColorPickerSheet.swift'}:
             text = text.replace('Text(label)', 'Text(compositorZh(label))')
         text = text.replace('Button(title, action:', 'Button(compositorZh(title), action:')
