@@ -46,6 +46,14 @@ class LocalizationRegression(unittest.TestCase):
         self.assertIn('PRODUCT_BUNDLE_IDENTIFIER = com.wonderassembly.compositor.tests;', project)
         self.assertEqual(project.count('PRODUCT_NAME = "Compositor 中文";'), 2)
 
+    def test_gif_lens_and_moved_rail(self):
+        self.assertIn('tool == .type { Text("T")', self.read('UI/ToolRail.swift'))
+        self.assertIn('compositorZh("Search Layers")', self.read('UI/LayerSearchControls.swift'))
+        self.assertIn(' · 原始时长', self.read('UI/GIFTimeline.swift'))
+        self.assertIn('1 帧 · 静态画布', self.read('UI/ExportAsSheet.swift'))
+        self.assertIn('Text(layer.name).tag(ChannelPack.Source.layer(layer.id))', self.read('UI/ExportAsSheet.swift'))
+        self.assertIn('Text(compositorZh($0.rawValue)).tag($0)', self.read('UI/FilterSheet.swift'))
+
     def test_document_models_unchanged(self):
         for original in (ROOT / 'upstream/Compositor/Document').rglob('*'):
             if original.is_file():

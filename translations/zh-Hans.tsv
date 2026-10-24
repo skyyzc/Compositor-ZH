@@ -707,3 +707,74 @@ Transparency kept · sRGB	保留透明度 · sRGB
 sRGB	sRGB
 Create a canvas or import a file.	创建画布或导入文件。
 Import a file or add a blank layer.	导入文件或添加空白图层。
+Lens Effects	镜头效果
+Anamorphic Flare	变形镜头耀斑
+Starburst	星芒
+Mist	柔雾
+Prism	棱镜
+Bokeh	散景
+Hexagon	六边形
+Oval	椭圆
+Cat's Eye	猫眼
+Length	长度
+Strength	强度
+Copies	副本数量
+Offset	偏移
+Reach	范围
+Ring	亮环
+How long each frame shows	每一帧的显示时长
+Duplicate Frame	复制帧
+Delete Frame	删除帧
+Effect	效果
+How far the streaks reach across the picture	光条在画面中的延伸范围
+How bright a light has to be to flare	产生耀斑所需的光源亮度
+How far the lens's coatings turn each streak blue along its length; none keeps the light's own color	镜头镀膜使光条沿长度方向变蓝的程度；设为零则保留光源原色
+How far the spikes reach	星芒光刺的延伸范围
+How bright a light has to be to sparkle	产生星芒所需的光源亮度
+Points	光刺数量
+How many spikes each light has, as the lens's aperture blades make them	每个光源的光刺数量，模拟镜头光圈叶片产生的星芒
+How much light scatters: a soft halo around bright areas, and gently lifted shadows	光线散射程度：在明亮区域周围产生柔和光晕，并轻微提亮阴影
+How far the light spreads	光线扩散的范围
+How many times the picture echoes, each fainter	图像重影的次数，后续重影逐渐变淡
+How far apart the copies are	重影之间的间距
+Which way it's pushed, toward the edge the prism sits at	图像偏移方向，朝向棱镜所在的边缘
+How far into the frame the copies show from that edge	重影从该边缘向画面内部延伸的范围
+How far out of focus: the size of each disc	失焦程度，即每个弥散光斑的大小
+How brightly lights open into discs	光源形成弥散光斑的明亮程度
+Light gathered at each disc's rim, as some lenses draw it	每个光斑边缘聚集的光线，模拟部分镜头的亮环效果
+The aperture's shape: round wide open, a hexagon of blades, an anamorphic oval, or a cat's eye toward the edges	光圈形状：全开时的圆形、叶片形成的六边形、变形镜头的椭圆，或靠近画面边缘的猫眼形
+Clear All	全部清除
+Show only some kinds of layer	仅显示指定类型的图层
+Filter the layer list	筛选图层列表
+Enabled masks apply here, as on the canvas. Drag or scroll to move around; double-click switches between Fit and 100%.	此处与画布一样应用已启用的蒙版。拖动或滚动以移动视图；双击在适合窗口和 100% 之间切换。
+Loop	循环
+Forever	无限循环
+Once	播放一次
+Transparency	透明度
+Keep transparent areas	保留透明区域
+GIF keeps fully transparent or opaque pixels; soft edges use a 50% threshold.	GIF 仅保留完全透明或不透明的像素；柔和边缘按 50% 阈值处理。
+Frames	帧
+Up to 256 colors · sRGB	最多 256 色 · sRGB
+Pause	暂停
+Play	播放
+Pause the animation preview.	暂停动画预览。
+Play the animation preview.	播放动画预览。
+Pause animation preview	暂停动画预览
+Play animation preview	播放动画预览
+Images	图像
+Shapes	形状
+Folders	文件夹
+Adjustments	调整图层
+Selected	所选图层
+Filter to image layers	仅显示图像图层
+Filter to shape layers	仅显示形状图层
+Filter to text layers	仅显示文字图层
+Filter to folder layers	仅显示文件夹
+Filter to adjustment layers	仅显示调整图层
+Filter to the selected layers	仅显示所选图层
+Close the search	关闭搜索
+Search layers by name	按名称搜索图层
+Close search	关闭搜索
+Search layers	搜索图层
+Search Layers	搜索图层
+More	更多

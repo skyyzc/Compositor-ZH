@@ -46,6 +46,11 @@ jobs:
           -only-testing:CompositorTests/PSDArtboardTests
           -only-testing:CompositorTests/FilterLayerTests
           -only-testing:CompositorTests/FilterTests
+          -only-testing:CompositorTests/GIFLayerTests
+          -only-testing:CompositorTests/GIFPreviewPlaybackTests
+          -only-testing:CompositorTests/LensEffectsTests
+          -only-testing:CompositorTests/ToolRailTests
+          -only-testing:CompositorTests/GroupTests
       - name: Package preview
         run: |
           mkdir -p dist

@@ -95,6 +95,34 @@ nonisolated func compositorZh(_ value: String) -> String {
         text = path.read_text().replace('search.placeholderString = "Search Fonts"', 'search.placeholderString = compositorZh("Search Fonts")')
         text = text.replace('accessibilityDescription: "Clear search"', 'accessibilityDescription: compositorZh("Clear search")')
         path.write_text(text)
+    # 1.5.7 moved the rail out of ContentView and introduced GIF/search UI.
+    path = output / 'Compositor/UI/ToolRail.swift'
+    if path.exists():
+        text = path.read_text().replace('else if tool == .cloneStamp', 'else if tool == .type { Text("T").font(.system(size: 17, weight: .medium)) }\n                else if tool == .cloneStamp')
+        text = text.replace('.help(tool.label)', '.help(compositorZh(tool.label))').replace('.accessibilityLabel(tool.label)', '.accessibilityLabel(compositorZh(tool.label))')
+        path.write_text(text)
+    path = output / 'Compositor/UI/LayerSearchControls.swift'
+    if path.exists():
+        text = path.read_text().replace('field.placeholderString = "Search Layers"', 'field.placeholderString = compositorZh("Search Layers")')
+        text = text.replace('.help(searching ? "Close the search" : "Search layers by name")', '.help(compositorZh(searching ? "Close the search" : "Search layers by name"))')
+        text = text.replace('.accessibilityLabel(searching ? "Close search" : "Search layers")', '.accessibilityLabel(compositorZh(searching ? "Close search" : "Search layers"))')
+        path.write_text(text)
+    path = output / 'Compositor/UI/GIFTimeline.swift'
+    if path.exists():
+        text = path.read_text().replace('.help(isPlaying ? "Pause" : "Play")', '.help(compositorZh(isPlaying ? "Pause" : "Play"))')
+        text = text.replace(' · Original', ' · 原始时长').replace('Frame \\(number)', '第 \\(number) 帧')
+        path.write_text(text)
+    path = output / 'Compositor/UI/ExportAsSheet.swift'
+    text = path.read_text()
+    text = text.replace('Menu(chosen ? format.rawValue : "More")', 'Menu(compositorZh(chosen ? format.rawValue : "More"))')
+    text = text.replace('.help(isGIFPreviewPlaying ? "Pause the animation preview." : "Play the animation preview.")', '.help(compositorZh(isGIFPreviewPlaying ? "Pause the animation preview." : "Play the animation preview."))')
+    text = text.replace('.accessibilityLabel(isGIFPreviewPlaying ? "Pause animation preview" : "Play animation preview")', '.accessibilityLabel(compositorZh(isGIFPreviewPlaying ? "Pause animation preview" : "Play animation preview"))')
+    text = text.replace('"Encoding frame \\(min($0.completed + 1, $0.total)) of \\($0.total)…"', '"正在编码第 \\(min($0.completed + 1, $0.total)) / \\($0.total) 帧…"')
+    text = text.replace('?? "Updating…" : "Updating…"', '?? compositorZh("Updating…") : compositorZh("Updating…")')
+    text = text.replace('1 frame · Still canvas', '1 帧 · 静态画布')
+    text = text.replace('\\(schedule.frames.count) \\(schedule.frames.count == 1 ? "frame" : "frames")', '\\(schedule.frames.count) 帧')
+    text = text.replace('Other formats: TIFF, PDF and GIF\\(others.contains(.exr) ? ", EXR to keep light brighter than white" : ""), and Channel Pack for game textures', '其他格式：TIFF、PDF、GIF\\(others.contains(.exr) ? "、保留超白亮度的 EXR" : "")，以及用于游戏纹理的通道打包')
+    path.write_text(text)
     # Native dialog captions use String, not LocalizedStringKey.
     for path in (output / 'Compositor/IO').glob('*.swift'):
         if path.name == 'UpdateDriver.swift': continue  # Official updater is inactive.
