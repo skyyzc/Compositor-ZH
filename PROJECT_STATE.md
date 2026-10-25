@@ -47,3 +47,12 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 新版本出现则继续翻译、定向回归和云端构建，仅在新产物、实质失败或必须用户操作时通知。未截图验收的版本仅发布预览；禁止自动替换用户已验收版本。
 - 任务涉及本地文件时需电脑开机、Codex 运行。
 - NEXT：等待用户对 1.5.7 镜头效果、GIF 时间轴/导出、图层搜索等界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
+
+## 当前工作 2026-10-25：官方 1.5.8 迁移
+
+- 检出正式 v1.5.8，2026-10-24 04:48:14 UTC 发布，固定源 8adf15e3b9e421dc1f2e0de28cb190d1fb5b48e2。最新可下载预览暂仍 1.5.7。
+- 官方修复 1.5.7 错误拒绝格式 15/16（1.5.4/1.5.5 保存）的项目；保留其 ProjectStore 逻辑，新增逐字节不变检查，云端加入 ProjectTests，含 projectsFromEarlierReleasesStillOpen。
+- 棱镜新增单向/双向及模糊说明、阈值说明，新增 8 条词条，共 786 条；8 项本地化边界检查和 FilterSheet 语法解析通过。
+- 汉化代码提交 45c7a19689b29d590099ab34945a673a2f379afe，构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40152691384，结论 success：云端编译、8 项本地化边界检查、94 项相关上游测试通过，包含 ProjectTests/projectsFromEarlierReleasesStillOpen()，准备发布。
+- 项目格式仍 17；新 app 读取旧项目修复不意味着旧 app 能读取新版保存项目。原版/已发布预览保留，不操作桌面。
+- NEXT：构建成功后创建匹配代码 SHA 的 tag/预览 Release，再调用 publish.yml 云端校验发布；失败则先定位修复，不报告预览可下载。
