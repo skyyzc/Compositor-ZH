@@ -60,6 +60,14 @@ class LocalizationRegression(unittest.TestCase):
         self.assertIn('Text(title).font(.callout.weight(.medium))', panel)
         self.assertNotIn('Text(compositorZh(title))', panel)
 
+    def test_project_compatibility_loader_unchanged(self):
+        original = ROOT / 'upstream/Compositor/IO/ProjectStore.swift'
+        generated = ROOT / 'build-source/Compositor/IO/ProjectStore.swift'
+        self.assertEqual(original.read_bytes(), generated.read_bytes())
+        terms = dict(line.split('\t') for line in (ROOT / 'translations/zh-Hans.tsv').read_text().splitlines() if line.strip())
+        for key in ['Direction', 'One Way', 'Both Ways', "Soften the copies, more the farther they're pushed"]:
+            self.assertIn(key, terms)
+
     def test_document_models_unchanged(self):
         for original in (ROOT / 'upstream/Compositor/Document').rglob('*'):
             if original.is_file():

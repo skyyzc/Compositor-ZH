@@ -779,3 +779,11 @@ Search layers	搜索图层
 Search Layers	搜索图层
 More	更多
 No layers match the filter.	没有符合筛选条件的图层。
+How bright a light has to be to flare; near 100, only the biggest, brightest spots	产生耀斑所需的光源亮度；接近 100 时，仅保留最大、最明亮的光点
+How bright a light has to be to sparkle; near 100, only the biggest, brightest spots	产生星芒所需的光源亮度；接近 100 时，仅保留最大、最明亮的光点
+Which way the copies step	重影逐次偏移的方向
+Soften the copies, more the farther they're pushed	柔化重影，偏移越远的重影越模糊
+Direction	方向
+One Way	单向
+Both Ways	双向
+Copies to one side of the picture, or out to both	重影延伸至画面一侧，或向两侧延伸

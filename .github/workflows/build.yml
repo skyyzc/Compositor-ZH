@@ -51,6 +51,7 @@ jobs:
           -only-testing:CompositorTests/LensEffectsTests
           -only-testing:CompositorTests/ToolRailTests
           -only-testing:CompositorTests/GroupTests
+          -only-testing:CompositorTests/ProjectTests
       - name: Package preview
         run: |
           mkdir -p dist
