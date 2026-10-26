@@ -54,3 +54,12 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 棱镜新增单向/双向及模糊控制、阈值说明，补充 8 条词条；无需修改既有显示适配器。
 - 无桌面/应用操作。CLI 查询发布状态曾连接失败，改用 GitHub connector 的 fetch_workflow_run_jobs 和 fetch（支持 releases/tags API）确认成功；后续优先复用这些读工具，避免无意义重试。
 - 整体仍 PARTIAL，最新 UI、视觉效果、用户真实文件与编辑体验待人工验收。状态无变化时按持续任务保持安静，不重复构建或提醒。
+
+## 当前工作 2026-10-26：官方 1.5.9 迁移
+
+- 检出正式 v1.5.9，2026-10-25 20:59:05 UTC 发布，固定源 efc06ffdf6f93606e59a1f2220fcd64a5d4e0ade。最近已发布预览仍为 1.5.8。
+- 新增暗角/镜头效果/局部色调对比调整图层，滤镜菜单重排；复用已有中文词条，无新增词条（786）。新增回归确认提取后的 filterMenuItem 仍调用中文显示翻译；9 项本地检查、CompositorApp 语法解析通过。
+- 跟进官方调整图层缓存及 GPU 渲染更新；云端增加 AdjustmentLayerTests、AdjustmentCacheTests、GPUCanvasTests。未运行需要单独启用的专用性能基准，不宣称性能倍数已验证。
+- 上游格式升至 18；旧版可能拒绝新版保存项目。Document 模型及 ProjectStore 仍与官方逐字节一致。
+- 代码提交 9f0ff6c68c54ce2d49156100cdc4e0ea1504e245；构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40257650064 success；9 项本地化边界检查及 129 项相关上游测试通过，含 2 项调整缓存和 23 个 GPU 测试方法，未运行专用性能基准。构建/测试成功后创建准确 SHA 的 tag、预览 Release 并调用 publish.yml；未发布前不得通知新包可下载。
+- 无桌面/应用操作，最新 UI/渲染观感仍须用户人工验收。
