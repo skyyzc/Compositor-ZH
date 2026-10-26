@@ -10,18 +10,18 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 不覆盖 /Applications/Compositor.app；中文预览为独立 local.compositor.zh。
 - 只翻译显示边界；不改文档模型、枚举 rawValue、快捷键/功能标识、用户文件名或图层名。构建成功不等于完整目标 VERIFIED。
 
-## 当前基线及交付（2026-10-25）
+## 当前基线及交付（2026-10-26）
 
 - 仓库 https://github.com/skyyzc/Compositor-ZH。
-- upstream.json 固定官方 1.5.8，提交 8adf15e3b9e421dc1f2e0de28cb190d1fb5b48e2；官方发布时间 2026-10-24 04:48:14 UTC。
-- 汉化代码提交 45c7a19689b29d590099ab34945a673a2f379afe；786 条去重词条，保守静态缺词候选 0，不代表完整 UI 覆盖率。
-- 最新预览：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.8-zh.preview.1
-- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.5.8-zh.preview.1/Compositor-ZH-1.5.8-preview.1.zip
-- Release asset uploaded，12,288,887 字节；SHA256 c487cab6a7f21a6f1f4b91c8bbc1d85316e1092d84223f253ed5b86aedab8a2a。Release 同时有 SHA256SUMS.txt。
-- 构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40152691384 success；8 项本地化边界回归及 94 项相关上游测试通过，含 ProjectTests/projectsFromEarlierReleasesStillOpen()（格式 15/16）。
-- 发布 https://github.com/skyyzc/Compositor-ZH/actions/runs/40153352474 success：原始 ZIP 校验、app 版本/标识检查、测试包清理、临时签名/完整性检查、打包上传。已通过 GitHub connector 确认成功和 Release assets uploaded。
-- 上游项目格式仍为 17；1.5.8 修复 1.5.7 错误拒绝格式 15/16 的兼容性缺陷（影响 1.5.4/1.5.5 保存的项目）。原始 ProjectStore 与生成副本逐字节一致，沿用官方修复，不降级文件格式。
-- 旧应用仍可能无法打开新版保存的项目，请使用副本测试；历史预览均保留。
+- upstream.json 固定官方 1.5.9，提交 efc06ffdf6f93606e59a1f2220fcd64a5d4e0ade；官方发布时间 2026-10-25 20:59:05 UTC。
+- 汉化代码提交 9f0ff6c68c54ce2d49156100cdc4e0ea1504e245；786 条词条，保守静态缺词候选 0，不代表完整 UI 覆盖率。本轮复用既有词条，无新译文。
+- 最新预览：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.9-zh.preview.1
+- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.5.9-zh.preview.1/Compositor-ZH-1.5.9-preview.1.zip
+- Release asset uploaded，12,370,634 字节；SHA256 e795ec8c8e9b3e71c6206b908c9bba164cc9115828e850dd04e4c1026ecd47fe。Release 同时有 SHA256SUMS.txt。
+- 构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40257650064 success；9 项本地化边界回归及 129 项相关上游测试通过。GitHub job 日志确认 TEST SUCCEEDED，含 2 个调整缓存和 23 个 GPU 测试方法；没有执行需单独启用的专用性能基准，不宣称速度倍数已验证。
+- 发布 https://github.com/skyyzc/Compositor-ZH/actions/runs/40274704573 success；原始 ZIP 校验、app 版本/标识检查、测试包清理、临时签名/完整性检查、打包上传均成功；GitHub connector 已确认资产 uploaded。
+- 上游项目格式升至 18，新增暗角、镜头效果及局部色调对比调整图层。原始 Document 模型和 ProjectStore 与生成副本逐字节一致，不修改官方兼容逻辑。
+- 1.5.8 修复的格式 15/16 旧项目读取逻辑继续保留；相关 ProjectTests 仍在回归范围。旧应用可能无法打开新版保存的项目，请使用副本测试；历史预览均保留。
 
 ## 实现与证据边界
 
@@ -46,7 +46,7 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - automationId=compositor，ACTIVE，每天上海时间 10:00 返回本聊天检查官方正式发行版；版本及待处理状态无变化则保持安静，不重复构建/通知。
 - 新版本出现则继续翻译、定向回归和云端构建，仅在新产物、实质失败或必须用户操作时通知。未截图验收的版本仅发布预览；禁止自动替换用户已验收版本。
 - 任务涉及本地文件时需电脑开机、Codex 运行。
-- NEXT：等待用户对 1.5.8 棱镜单向/双向/模糊、旧项目打开及既有界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
+- NEXT：等待用户对 1.5.9 新调整图层、重排滤镜菜单、渲染效果及既有界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
 
 ## 本轮变更 1.5.8
 
@@ -55,11 +55,10 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 无桌面/应用操作。CLI 查询发布状态曾连接失败，改用 GitHub connector 的 fetch_workflow_run_jobs 和 fetch（支持 releases/tags API）确认成功；后续优先复用这些读工具，避免无意义重试。
 - 整体仍 PARTIAL，最新 UI、视觉效果、用户真实文件与编辑体验待人工验收。状态无变化时按持续任务保持安静，不重复构建或提醒。
 
-## 当前工作 2026-10-26：官方 1.5.9 迁移
+## 本轮变更 1.5.9
 
-- 检出正式 v1.5.9，2026-10-25 20:59:05 UTC 发布，固定源 efc06ffdf6f93606e59a1f2220fcd64a5d4e0ade。最近已发布预览仍为 1.5.8。
-- 新增暗角/镜头效果/局部色调对比调整图层，滤镜菜单重排；复用已有中文词条，无新增词条（786）。新增回归确认提取后的 filterMenuItem 仍调用中文显示翻译；9 项本地检查、CompositorApp 语法解析通过。
-- 跟进官方调整图层缓存及 GPU 渲染更新；云端增加 AdjustmentLayerTests、AdjustmentCacheTests、GPUCanvasTests。未运行需要单独启用的专用性能基准，不宣称性能倍数已验证。
-- 上游格式升至 18；旧版可能拒绝新版保存项目。Document 模型及 ProjectStore 仍与官方逐字节一致。
-- 代码提交 9f0ff6c68c54ce2d49156100cdc4e0ea1504e245；构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40257650064 success；9 项本地化边界检查及 129 项相关上游测试通过，含 2 项调整缓存和 23 个 GPU 测试方法，未运行专用性能基准。构建/测试成功后创建准确 SHA 的 tag、预览 Release 并调用 publish.yml；未发布前不得通知新包可下载。
-- 无桌面/应用操作，最新 UI/渲染观感仍须用户人工验收。
+- 跟进官方暗角/镜头效果/局部色调对比调整图层及滤镜菜单重排，新增回归确认提取后的 filterMenuItem 保留中文显示调用。
+- 云端增加 AdjustmentLayerTests、AdjustmentCacheTests、GPUCanvasTests，验证官方调整缓存及 GPU 渲染更新。专用性能基准未运行；不能把单元测试或官方性能声明当成本机实际体验证据。
+- 无显示适配器或词库改动；9 项本地检查、应用入口语法解析通过。
+- CLI watch 曾因 unexpected EOF 退出，并非构建失败；已通过 connector fetch_workflow_run_jobs 确认成功，再用 fetch_workflow_job_logs 的 structuredContent.content 提取 129 项通过及 TEST SUCCEEDED，未输出完整大日志。
+- 无桌面/应用操作。整体仍 PARTIAL，最新 UI、渲染观感、真实文件与编辑体验待人工验收。状态无变化时保持安静，不重复构建或提醒。
