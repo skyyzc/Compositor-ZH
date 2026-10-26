@@ -52,6 +52,9 @@ jobs:
           -only-testing:CompositorTests/ToolRailTests
           -only-testing:CompositorTests/GroupTests
           -only-testing:CompositorTests/ProjectTests
+          -only-testing:CompositorTests/AdjustmentLayerTests
+          -only-testing:CompositorTests/AdjustmentCacheTests
+          -only-testing:CompositorTests/GPUCanvasTests
       - name: Package preview
         run: |
           mkdir -p dist

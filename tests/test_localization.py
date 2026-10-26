@@ -68,6 +68,14 @@ class LocalizationRegression(unittest.TestCase):
         for key in ['Direction', 'One Way', 'Both Ways', "Soften the copies, more the farther they're pushed"]:
             self.assertIn(key, terms)
 
+    def test_reordered_filter_menu_keeps_translated_labels(self):
+        app = self.read('CompositorApp.swift')
+        helper = app.split('private func filterMenuItem', 1)[1].split('var body:', 1)[0]
+        self.assertIn('Button(compositorZh("\\(kind.rawValue)…"))', helper)
+        terms = dict(line.split('\t') for line in (ROOT / 'translations/zh-Hans.tsv').read_text().splitlines() if line.strip())
+        for key in ['Vignette', 'Lens Effects', 'Tonal Contrast']:
+            self.assertIn(key, terms)
+
     def test_document_models_unchanged(self):
         for original in (ROOT / 'upstream/Compositor/Document').rglob('*'):
             if original.is_file():
