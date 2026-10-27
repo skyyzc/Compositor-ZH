@@ -10,17 +10,17 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 不覆盖 /Applications/Compositor.app；中文预览为独立 local.compositor.zh。
 - 只翻译显示边界；不改文档模型、枚举 rawValue、快捷键/功能标识、用户文件名或图层名。构建成功不等于完整目标 VERIFIED。
 
-## 当前基线及交付（2026-10-26）
+## 当前基线及交付（2026-10-27）
 
 - 仓库 https://github.com/skyyzc/Compositor-ZH。
-- upstream.json 固定官方 1.5.9，提交 efc06ffdf6f93606e59a1f2220fcd64a5d4e0ade；官方发布时间 2026-10-25 20:59:05 UTC。
-- 汉化代码提交 9f0ff6c68c54ce2d49156100cdc4e0ea1504e245；786 条词条，保守静态缺词候选 0，不代表完整 UI 覆盖率。本轮复用既有词条，无新译文。
-- 最新预览：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.9-zh.preview.1
-- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.5.9-zh.preview.1/Compositor-ZH-1.5.9-preview.1.zip
-- Release asset uploaded，12,370,634 字节；SHA256 e795ec8c8e9b3e71c6206b908c9bba164cc9115828e850dd04e4c1026ecd47fe。Release 同时有 SHA256SUMS.txt。
-- 构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40257650064 success；9 项本地化边界回归及 129 项相关上游测试通过。GitHub job 日志确认 TEST SUCCEEDED，含 2 个调整缓存和 23 个 GPU 测试方法；没有执行需单独启用的专用性能基准，不宣称速度倍数已验证。
-- 发布 https://github.com/skyyzc/Compositor-ZH/actions/runs/40274704573 success；原始 ZIP 校验、app 版本/标识检查、测试包清理、临时签名/完整性检查、打包上传均成功；GitHub connector 已确认资产 uploaded。
-- 上游项目格式升至 18，新增暗角、镜头效果及局部色调对比调整图层。原始 Document 模型和 ProjectStore 与生成副本逐字节一致，不修改官方兼容逻辑。
+- upstream.json 固定官方 1.5.11，提交 9959c32d77330ec8d7b42a49353d903283ecb8e6；官方发布时间 2026-10-26 23:09:51 UTC。
+- 汉化代码提交 c40aa8c94958311f657a71031461b59d36e1abde；820 条词条，保守静态缺词候选 0，不代表完整 UI 覆盖率。本轮补充 34 条译文。
+- 最新预览：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.11-zh.preview.1
+- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.5.11-zh.preview.1/Compositor-ZH-1.5.11-preview.1.zip
+- Release asset uploaded，12,463,575 字节；SHA256 4b9cc659776ef4515ff7bc45b754dcddcdce6ba88b14e1f8951eab44bb81414b。Release 同时有 SHA256SUMS.txt。
+- 构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40436240351 success；10 项本地化边界回归及 153 项相关上游测试通过。GitHub job 日志确认 TEST SUCCEEDED，含 9 个裁剪、5 个对齐及 6 个浮动面板测试方法；没有执行需单独启用的专用性能基准，不宣称速度倍数已验证。
+- 发布 https://github.com/skyyzc/Compositor-ZH/actions/runs/40437218526 success；原始 ZIP 校验、app 版本/标识检查、测试包清理、临时签名/完整性检查、打包上传均成功；GitHub connector 已确认资产 uploaded。
+- 上游项目格式升至 20，新增锐化调整图层和棱镜色散；包含既有暗角、镜头效果及局部色调对比调整图层。原始 Document 模型和 ProjectStore 与生成副本逐字节一致，不修改官方兼容逻辑。
 - 1.5.8 修复的格式 15/16 旧项目读取逻辑继续保留；相关 ProjectTests 仍在回归范围。旧应用可能无法打开新版保存的项目，请使用副本测试；历史预览均保留。
 
 ## 实现与证据边界
@@ -46,26 +46,12 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - automationId=compositor，ACTIVE，每天上海时间 10:00 返回本聊天检查官方正式发行版；版本及待处理状态无变化则保持安静，不重复构建/通知。
 - 新版本出现则继续翻译、定向回归和云端构建，仅在新产物、实质失败或必须用户操作时通知。未截图验收的版本仅发布预览；禁止自动替换用户已验收版本。
 - 任务涉及本地文件时需电脑开机、Codex 运行。
-- NEXT：等待用户对 1.5.9 新调整图层、重排滤镜菜单、渲染效果及既有界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
+- NEXT：等待用户对 1.5.11 自定义裁剪、对齐/分布、锐化与色散效果及既有界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
 
-## 本轮变更 1.5.8
+## 本轮变更 1.5.11
 
-- 跟进官方旧项目读取修复；云端加入 ProjectTests，确认格式 15/16 读取回归通过；本地加入 ProjectStore 字节不变检查。
-- 棱镜新增单向/双向及模糊控制、阈值说明，补充 8 条词条；无需修改既有显示适配器。
-- 无桌面/应用操作。CLI 查询发布状态曾连接失败，改用 GitHub connector 的 fetch_workflow_run_jobs 和 fetch（支持 releases/tags API）确认成功；后续优先复用这些读工具，避免无意义重试。
-- 整体仍 PARTIAL，最新 UI、视觉效果、用户真实文件与编辑体验待人工验收。状态无变化时按持续任务保持安静，不重复构建或提醒。
-
-## 本轮变更 1.5.9
-
-- 跟进官方暗角/镜头效果/局部色调对比调整图层及滤镜菜单重排，新增回归确认提取后的 filterMenuItem 保留中文显示调用。
-- 云端增加 AdjustmentLayerTests、AdjustmentCacheTests、GPUCanvasTests，验证官方调整缓存及 GPU 渲染更新。专用性能基准未运行；不能把单元测试或官方性能声明当成本机实际体验证据。
-- 无显示适配器或词库改动；9 项本地检查、应用入口语法解析通过。
-- CLI watch 曾因 unexpected EOF 退出，并非构建失败；已通过 connector fetch_workflow_run_jobs 确认成功，再用 fetch_workflow_job_logs 的 structuredContent.content 提取 129 项通过及 TEST SUCCEEDED，未输出完整大日志。
-- 无桌面/应用操作。整体仍 PARTIAL，最新 UI、渲染观感、真实文件与编辑体验待人工验收。状态无变化时保持安静，不重复构建或提醒。
-
-## 当前工作 1.5.11（2026-10-27）
-
-- 发现官方正式版 1.5.11（2026-10-26 23:09:51 UTC），固定 9959c32d77330ec8d7b42a49353d903283ecb8e6；代码 c40aa8c94958311f657a71031461b59d36e1abde。
-- 跨过 1.5.10，新增锐化调整图层、裁剪自定义比例、对齐/分布、棱镜色散；补充 34 条词条至 820，静态候选 0。动态裁剪与对齐显示适配完成；10 项本地化边界回归通过，Document/ProjectStore 字节保持官方源码。
-- 云端构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40436240351 success，job 121965462111；10 项本地化检查及 153 项相关上游测试通过（含 9 个裁剪、5 个对齐、6 个浮动面板测试方法）。正在发布新预览，发布完成前可下载版本仍为上方 1.5.9。
-- 官方项目格式 20；新 UI/效果仍待用户人工截图验收。NEXT：确认云端结果并发布明确标注的预览，更新本文件与 README。
+- 跨过官方 1.5.10，跟进自定义裁剪比例、对齐/分布、锐化调整图层及棱镜色散。动态预设、菜单及图标提示在显示边界翻译，内部字符串与文档模型不变。
+- 跟进官方镜头效果蒙版绘制、颜色选择器卡住、平移光标等修复。词库新增 34 条；10 项本地化检查通过，静态候选 0 不等于完整 UI 覆盖。
+- 云端增加 CropTests、LayerAlignTests、FloatingPanelTests；job 121965462111 日志确认 TEST SUCCEEDED，153 个唯一测试方法通过。发布 job 121968672216 success，REST 已确认 ZIP 与校验文件 uploaded。
+- gh workflow run 因 GraphQL TLS 超时未提交，随后使用 REST dispatch 成功。connector 状态查询长时间无返回，停止该只读查询后用 gh REST 确认发布结果；无重复构建或重复发布。
+- 无桌面/应用操作。整体仍 PARTIAL，新版 UI、真实文件与体验仍待人工验收；旧预览均保留，无自动安装。
