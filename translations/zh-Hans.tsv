@@ -787,3 +787,37 @@ Direction	方向
 One Way	单向
 Both Ways	双向
 Copies to one side of the picture, or out to both	重影延伸至画面一侧，或向两侧延伸
+Custom ratio	自定义比例
+Width:Height	宽度:高度
+Width:height, such as 4:5 or 3:2	宽度:高度，例如 4:5 或 3:2
+Enter a positive ratio within the document size limits.	请输入文档尺寸限制范围内的正数比例。
+How strongly edges and fine detail are brought out	增强边缘和细节的强度
+How fine the detail it sharpens: small for crisp texture, larger for a punchier look	锐化细节的尺度：较小值突出精细纹理，较大值增强整体对比
+Fringe	色散
+Split each copy's red and blue apart, as glass does; 0 keeps the copies crisp	像玻璃折射一样分离每个副本的红色和蓝色；设为 0 可保持副本清晰
+Align	对齐
+Distribute	分布
+Line layers up with each other, the selection, or the canvas when one is selected	将图层彼此对齐、与选区对齐，或在仅选择一个图层时与画布对齐
+Free	自由
+Sharpen	锐化
+Left Edges	左边缘
+Align Left Edges	对齐左边缘
+Horizontal Centers	水平中心
+Align Horizontal Centers	对齐水平中心
+Distribute Horizontal Centers (three or more layers)	均匀分布水平中心（至少三个图层）
+Right Edges	右边缘
+Align Right Edges	对齐右边缘
+Top Edges	上边缘
+Align Top Edges	对齐上边缘
+Vertical Centers	垂直中心
+Align Vertical Centers	对齐垂直中心
+Distribute Vertical Centers (three or more layers)	均匀分布垂直中心（至少三个图层）
+Bottom Edges	下边缘
+Align Bottom Edges	对齐下边缘
+Horizontal Spacing	水平间距
+Distribute Horizontal Spacing (three or more layers)	均匀分布水平间距（至少三个图层）
+Vertical Spacing	垂直间距
+Distribute Vertical Spacing (three or more layers)	均匀分布垂直间距（至少三个图层）
+Flip Horizontal	水平翻转
+Flip Vertical	垂直翻转
+Custom…	自定义…

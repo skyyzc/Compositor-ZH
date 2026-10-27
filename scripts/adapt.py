@@ -125,6 +125,18 @@ nonisolated func compositorZh(_ value: String) -> String {
     text = text.replace('\\(schedule.frames.count) \\(schedule.frames.count == 1 ? "frame" : "frames")', '\\(schedule.frames.count) 帧')
     text = text.replace('Other formats: TIFF, PDF and GIF\\(others.contains(.exr) ? ", EXR to keep light brighter than white" : ""), and Channel Pack for game textures', '其他格式：TIFF、PDF、GIF\\(others.contains(.exr) ? "、保留超白亮度的 EXR" : "")，以及用于游戏纹理的通道打包')
     path.write_text(text)
+    # 1.5.11: crop presets and align menu captions are dynamic String values.
+    path = output / 'Compositor/UI/CropControls.swift'
+    text = path.read_text().replace('Text($0)', 'Text(compositorZh($0))')
+    path.write_text(text)
+    path = output / 'Compositor/UI/TransformInspector.swift'
+    text = path.read_text().replace('.help(title).accessibilityLabel(title)', '.help(compositorZh(title)).accessibilityLabel(compositorZh(title))')
+    path.write_text(text)
+    path = output / 'Compositor/CompositorApp.swift'
+    text = path.read_text()
+    for expression in ['alignment.rawValue', 'distribution.rawValue']:
+        text = text.replace('Button(' + expression + ')', 'Button(compositorZh(' + expression + '))')
+    path.write_text(text)
     # Native dialog captions use String, not LocalizedStringKey.
     for path in (output / 'Compositor/IO').glob('*.swift'):
         if path.name == 'UpdateDriver.swift': continue  # Official updater is inactive.

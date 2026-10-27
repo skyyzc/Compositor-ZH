@@ -76,6 +76,20 @@ class LocalizationRegression(unittest.TestCase):
         for key in ['Vignette', 'Lens Effects', 'Tonal Contrast']:
             self.assertIn(key, terms)
 
+    def test_crop_and_alignment_display_boundaries(self):
+        crop = self.read('UI/CropControls.swift')
+        self.assertIn('Text(compositorZh($0))', crop)
+        self.assertIn('Text(session.cropRatioChoice).tag(session.cropRatioChoice)', crop)
+        self.assertIn('if choice == "Custom"', crop)
+        app = self.read('CompositorApp.swift')
+        for expression in ['alignment.rawValue', 'distribution.rawValue']:
+            self.assertIn('Button(compositorZh(' + expression + '))', app)
+        inspector = self.read('UI/TransformInspector.swift')
+        self.assertIn('.help(compositorZh(title)).accessibilityLabel(compositorZh(title))', inspector)
+        terms = dict(line.split('\t') for line in (ROOT / 'translations/zh-Hans.tsv').read_text().splitlines() if line.strip())
+        for key in ['Align Left Edges', 'Distribute Horizontal Spacing (three or more layers)', 'Fringe', 'Sharpen', 'Custom ratio']:
+            self.assertIn(key, terms)
+
     def test_document_models_unchanged(self):
         for original in (ROOT / 'upstream/Compositor/Document').rglob('*'):
             if original.is_file():

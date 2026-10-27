@@ -55,6 +55,9 @@ jobs:
           -only-testing:CompositorTests/AdjustmentLayerTests
           -only-testing:CompositorTests/AdjustmentCacheTests
           -only-testing:CompositorTests/GPUCanvasTests
+          -only-testing:CompositorTests/CropTests
+          -only-testing:CompositorTests/LayerAlignTests
+          -only-testing:CompositorTests/FloatingPanelTests
       - name: Package preview
         run: |
           mkdir -p dist
