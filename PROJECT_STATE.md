@@ -55,3 +55,10 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 云端增加 CropTests、LayerAlignTests、FloatingPanelTests；job 121965462111 日志确认 TEST SUCCEEDED，153 个唯一测试方法通过。发布 job 121968672216 success，REST 已确认 ZIP 与校验文件 uploaded。
 - gh workflow run 因 GraphQL TLS 超时未提交，随后使用 REST dispatch 成功。connector 状态查询长时间无返回，停止该只读查询后用 gh REST 确认发布结果；无重复构建或重复发布。
 - 无桌面/应用操作。整体仍 PARTIAL，新版 UI、真实文件与体验仍待人工验收；旧预览均保留，无自动安装。
+
+## 当前工作 1.5.12（2026-10-28）
+
+- 官方正式版 1.5.12（2026-10-27 18:39:20 UTC），固定 fe0a146d1a94476bbe68fb634ae9c31224eabced；汉化提交 97c31ced605a729edd545677a88f96b038929e41。
+- 新增轮廓光滤镜显示适配、动态光源编号与颜色选择器标题，补充 11 条至 831 条词条；静态候选 0，11 项本地化检查通过。Document/ProjectStore 保持官方字节；格式仍为 20。
+- 云端构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40619047121 success，job 122588293395；11 项本地化检查与 160 项相关上游测试通过，含 7 项 RimLightTests。正准备预览发行；发布前可下载基线仍为上方 1.5.11。
+- NEXT：确认云端构建/回归结果、发布预览并更新此状态；实际轮廓光效果及新界面仍待用户人工验收。
