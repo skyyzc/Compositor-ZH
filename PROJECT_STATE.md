@@ -10,17 +10,17 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 不覆盖 /Applications/Compositor.app；中文预览为独立 local.compositor.zh。
 - 只翻译显示边界；不改文档模型、枚举 rawValue、快捷键/功能标识、用户文件名或图层名。构建成功不等于完整目标 VERIFIED。
 
-## 当前基线及交付（2026-10-27）
+## 当前基线及交付（2026-10-28）
 
 - 仓库 https://github.com/skyyzc/Compositor-ZH。
-- upstream.json 固定官方 1.5.11，提交 9959c32d77330ec8d7b42a49353d903283ecb8e6；官方发布时间 2026-10-26 23:09:51 UTC。
-- 汉化代码提交 c40aa8c94958311f657a71031461b59d36e1abde；820 条词条，保守静态缺词候选 0，不代表完整 UI 覆盖率。本轮补充 34 条译文。
-- 最新预览：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.11-zh.preview.1
-- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.5.11-zh.preview.1/Compositor-ZH-1.5.11-preview.1.zip
-- Release asset uploaded，12,463,575 字节；SHA256 4b9cc659776ef4515ff7bc45b754dcddcdce6ba88b14e1f8951eab44bb81414b。Release 同时有 SHA256SUMS.txt。
-- 构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40436240351 success；10 项本地化边界回归及 153 项相关上游测试通过。GitHub job 日志确认 TEST SUCCEEDED，含 9 个裁剪、5 个对齐及 6 个浮动面板测试方法；没有执行需单独启用的专用性能基准，不宣称速度倍数已验证。
-- 发布 https://github.com/skyyzc/Compositor-ZH/actions/runs/40437218526 success；原始 ZIP 校验、app 版本/标识检查、测试包清理、临时签名/完整性检查、打包上传均成功；GitHub connector 已确认资产 uploaded。
-- 上游项目格式升至 20，新增锐化调整图层和棱镜色散；包含既有暗角、镜头效果及局部色调对比调整图层。原始 Document 模型和 ProjectStore 与生成副本逐字节一致，不修改官方兼容逻辑。
+- upstream.json 固定官方 1.5.12，提交 fe0a146d1a94476bbe68fb634ae9c31224eabced；官方发布时间 2026-10-27 18:39:20 UTC。
+- 汉化代码提交 97c31ced605a729edd545677a88f96b038929e41；831 条词条，保守静态缺词候选 0，不代表完整 UI 覆盖率。本轮补充 11 条译文。
+- 最新预览：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.12-zh.preview.1
+- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.5.12-zh.preview.1/Compositor-ZH-1.5.12-preview.1.zip
+- Release asset uploaded，12,539,173 字节；SHA256 cea9b5e9492422f7737152697f73d6e62048335ed1389bb97b2fa28ba9c85f35。Release 同时有 SHA256SUMS.txt。
+- 构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40619047121 success；11 项本地化边界回归及 160 项相关上游测试通过。GitHub job 日志确认 TEST SUCCEEDED，含 7 个轮廓光测试方法；没有执行需单独启用的专用性能基准，不宣称速度倍数已验证。
+- 发布 https://github.com/skyyzc/Compositor-ZH/actions/runs/40620029883 success；原始 ZIP 校验、app 版本/标识检查、测试包清理、临时签名/完整性检查、打包上传均成功；gh REST 已确认资产 uploaded。
+- 上游项目格式仍为 20；本次新增轮廓光滤镜，不更改官方文档格式与模型。原始 Document 模型和 ProjectStore 与生成副本逐字节一致，不修改官方兼容逻辑。
 - 1.5.8 修复的格式 15/16 旧项目读取逻辑继续保留；相关 ProjectTests 仍在回归范围。旧应用可能无法打开新版保存的项目，请使用副本测试；历史预览均保留。
 
 ## 实现与证据边界
@@ -46,19 +46,11 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - automationId=compositor，ACTIVE，每天上海时间 10:00 返回本聊天检查官方正式发行版；版本及待处理状态无变化则保持安静，不重复构建/通知。
 - 新版本出现则继续翻译、定向回归和云端构建，仅在新产物、实质失败或必须用户操作时通知。未截图验收的版本仅发布预览；禁止自动替换用户已验收版本。
 - 任务涉及本地文件时需电脑开机、Codex 运行。
-- NEXT：等待用户对 1.5.11 自定义裁剪、对齐/分布、锐化与色散效果及既有界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
+- NEXT：等待用户对 1.5.12 轮廓光及既有界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
 
-## 本轮变更 1.5.11
+## 本轮变更 1.5.12（2026-10-28）
 
-- 跨过官方 1.5.10，跟进自定义裁剪比例、对齐/分布、锐化调整图层及棱镜色散。动态预设、菜单及图标提示在显示边界翻译，内部字符串与文档模型不变。
-- 跟进官方镜头效果蒙版绘制、颜色选择器卡住、平移光标等修复。词库新增 34 条；10 项本地化检查通过，静态候选 0 不等于完整 UI 覆盖。
-- 云端增加 CropTests、LayerAlignTests、FloatingPanelTests；job 121965462111 日志确认 TEST SUCCEEDED，153 个唯一测试方法通过。发布 job 121968672216 success，REST 已确认 ZIP 与校验文件 uploaded。
-- gh workflow run 因 GraphQL TLS 超时未提交，随后使用 REST dispatch 成功。connector 状态查询长时间无返回，停止该只读查询后用 gh REST 确认发布结果；无重复构建或重复发布。
-- 无桌面/应用操作。整体仍 PARTIAL，新版 UI、真实文件与体验仍待人工验收；旧预览均保留，无自动安装。
-
-## 当前工作 1.5.12（2026-10-28）
-
-- 官方正式版 1.5.12（2026-10-27 18:39:20 UTC），固定 fe0a146d1a94476bbe68fb634ae9c31224eabced；汉化提交 97c31ced605a729edd545677a88f96b038929e41。
-- 新增轮廓光滤镜显示适配、动态光源编号与颜色选择器标题，补充 11 条至 831 条词条；静态候选 0，11 项本地化检查通过。Document/ProjectStore 保持官方字节；格式仍为 20。
-- 云端构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40619047121 success，job 122588293395；11 项本地化检查与 160 项相关上游测试通过，含 7 项 RimLightTests。正准备预览发行；发布前可下载基线仍为上方 1.5.11。
-- NEXT：确认云端构建/回归结果、发布预览并更新此状态；实际轮廓光效果及新界面仍待用户人工验收。
+- 适配轮廓光新增参数、主体识别提示、动态光源编号及颜色选择器标题，补充 11 条至 831 条词条；11 项本地化检查通过，静态候选 0 不等于完整 UI 覆盖。
+- 云端加入 RimLightTests；构建 job 122588293395 日志确认 TEST SUCCEEDED，160 个唯一测试方法通过，包含全部 7 个轮廓光方法。未执行专用性能基准。
+- 发布 run 40620029883 success，gh REST 已确认版本化 ZIP 和校验文件 uploaded；tag 指向构建源码 97c31ced605a729edd545677a88f96b038929e41。未重复构建。
+- Document 与 ProjectStore 仍保持官方字节，格式仍为 20。无桌面/应用操作，未安装或替换程序，旧预览均保留。整体仍 PARTIAL，新版照片效果、完整中文 UI 和体验待用户人工验收。
