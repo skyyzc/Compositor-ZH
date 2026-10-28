@@ -90,6 +90,17 @@ class LocalizationRegression(unittest.TestCase):
         for key in ['Align Left Edges', 'Distribute Horizontal Spacing (three or more layers)', 'Fringe', 'Sharpen', 'Custom ratio']:
             self.assertIn(key, terms)
 
+    def test_rim_light_display_boundaries(self):
+        sheet = self.read('UI/FilterSheet.swift')
+        self.assertIn('Text("光源 \\(index + 1)")', sheet)
+        self.assertIn('Text(compositorZh(edit?.committing', sheet)
+        picker = self.read('UI/ColorPickerSheet.swift')
+        self.assertIn('if case .rimLight(let index) = state.target', picker)
+        self.assertIn('颜色选择器（光源 \\(index + 1)）', picker)
+        terms = dict(line.split('\t') for line in (ROOT / 'translations/zh-Hans.tsv').read_text().splitlines() if line.strip())
+        for key in ['Rim Light', 'Finding the subject…', 'Add Light', 'Remove this light']:
+            self.assertIn(key, terms)
+
     def test_document_models_unchanged(self):
         for original in (ROOT / 'upstream/Compositor/Document').rglob('*'):
             if original.is_file():

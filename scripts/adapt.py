@@ -137,6 +137,17 @@ nonisolated func compositorZh(_ value: String) -> String {
     for expression in ['alignment.rawValue', 'distribution.rawValue']:
         text = text.replace('Button(' + expression + ')', 'Button(compositorZh(' + expression + '))')
     path.write_text(text)
+    # Rim Light numbers are display-only; preserve the model's light IDs and index.
+    path = output / 'Compositor/UI/FilterSheet.swift'
+    text = path.read_text().replace('Text("Light \\(index + 1)")', 'Text("光源 \\(index + 1)")')
+    text = text.replace('Text(edit?.committing == true ? "Applying…" : "Working…")', 'Text(compositorZh(edit?.committing == true ? "Applying…" : "Working…"))')
+    path.write_text(text)
+    path = output / 'Compositor/UI/ColorPickerSheet.swift'
+    text = path.read_text().replace('panel.show(title: state.target.title,', '''panel.show(title: {
+                       if case .rimLight(let index) = state.target { return "颜色选择器（光源 \\(index + 1)）" }
+                       return compositorZh(state.target.title)
+                   }(),''')
+    path.write_text(text)
     # Native dialog captions use String, not LocalizedStringKey.
     for path in (output / 'Compositor/IO').glob('*.swift'):
         if path.name == 'UpdateDriver.swift': continue  # Official updater is inactive.

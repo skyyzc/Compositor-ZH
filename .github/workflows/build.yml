@@ -58,6 +58,7 @@ jobs:
           -only-testing:CompositorTests/CropTests
           -only-testing:CompositorTests/LayerAlignTests
           -only-testing:CompositorTests/FloatingPanelTests
+          -only-testing:CompositorTests/RimLightTests
       - name: Package preview
         run: |
           mkdir -p dist

@@ -821,3 +821,14 @@ Distribute Vertical Spacing (three or more layers)	均匀分布垂直间距（�
 Flip Horizontal	水平翻转
 Flip Vertical	垂直翻转
 Custom…	自定义…
+Rim Light	轮廓光
+Finding the subject…	正在识别主体…
+Let the lights glow in the air around the subject, blending them into the background	让光源在主体周围产生辉光，并与背景融合
+Choose this light's color	选择此光源的颜色
+Remove this light	移除此光源
+Where the light comes from, behind the subject: 0° from the right, 90° from above	主体后方的光源方向：0° 为右侧，90° 为上方
+How far the light wraps around the subject's edges	光线沿主体边缘向内延伸的范围
+How the light ends on the inside: low feathers it off softly from the edge, high holds it bright and ends it crisply	光线向主体内部衰减的方式：较低值柔和渐隐，较高值保持明亮并形成清晰边界
+Add Light	添加光源
+Light the subject from another side as well	从另一个方向照亮主体
+Applying…	正在应用…
