@@ -119,6 +119,14 @@ class LocalizationRegression(unittest.TestCase):
         for key in ['Volumetric Light', 'Extract Depth', 'Getting depth…', 'Depth Contrast', 'Keep Subject Clear', 'Export Layers as PNGs…']:
             self.assertIn(key, terms)
 
+    def test_upstream_menu_assertions_follow_display_language(self):
+        text = (ROOT / 'build-source/CompositorTests/LayerTests.swift').read_text()
+        self.assertIn('#expect(compositorZh("Add Mask") == "添加蒙版")', text)
+        self.assertIn('titles.contains(compositorZh("Duplicate Layer"))', text)
+        self.assertIn('session.history.undoName == "Duplicate Layer"', text)
+        self.assertIn('coordinator.toggleMaskAction(nil)', text)
+        self.assertIn('mergeItem.isEnabled == session.canMergeLayers', text)
+
     def test_document_models_unchanged(self):
         for original in (ROOT / 'upstream/Compositor/Document').rglob('*'):
             if original.is_file():

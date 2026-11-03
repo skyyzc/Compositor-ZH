@@ -184,4 +184,13 @@ nonisolated func compositorZh(_ value: String) -> String {
         text = re.sub(r'(\.(?:title|messageText|informativeText) = )("[^"\\\n]*")(?=\s*$)', r'\1compositorZh(\2)', text, flags=re.MULTILINE)
         text = re.sub(r'(addButton\(withTitle: )("[^"\\\n]*")\)', r'\1compositorZh(\2))', text)
         path.write_text(text)
+    # Upstream's menu tests assert English display text. Adapt only those assertions;
+    # action selectors, enablement, model names and undo expectations remain original.
+    path = output / 'CompositorTests/LayerTests.swift'
+    text = path.read_text()
+    text = re.sub(r'((?:subTitles|titles)\.contains\()"([^"\n]+)"\)', r'\1compositorZh("\2"))', text)
+    text = re.sub(r'(\.title == )"([^"\n]+)"', r'\1compositorZh("\2")', text)
+    text = text.replace('.title == session.mergeTitle', '.title == compositorZh(session.mergeTitle)')
+    text = text.replace('let titles = menu.items.map(\\.title)', 'let titles = menu.items.map(\\.title)\n        #expect(compositorZh("Add Mask") == "添加蒙版")')
+    path.write_text(text)
     return changes
