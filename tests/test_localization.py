@@ -101,6 +101,24 @@ class LocalizationRegression(unittest.TestCase):
         for key in ['Rim Light', 'Finding the subject…', 'Add Light', 'Remove this light']:
             self.assertIn(key, terms)
 
+    def test_volumetric_and_native_layer_menu_boundaries(self):
+        menu = self.read('UI/NativeLayerList.swift')
+        self.assertIn('NSMenuItem(title: compositorZh(exportTitle)', menu)
+        self.assertIn('NSMenuItem(title: compositorZh(session.selectedClippingTitle)', menu)
+        self.assertIn('menuItem.title == compositorZh("Add Mask")', menu)
+        self.assertIn('#selector(exportLayersAction)', menu)
+        self.assertIn('Button(compositorZh(session.visibilityTitle))', self.read('CompositorApp.swift'))
+        controller = self.read('IO/ProjectController.swift')
+        self.assertIn('panel.nameFieldStringValue = names[0]', controller)
+        self.assertIn('Self.fileName(layer.name)', controller)
+        self.assertIn(r'“\(existing[0].lastPathComponent)”已存在', controller)
+        original = (ROOT / 'upstream/Compositor/IO/ProjectController.swift').read_text()
+        self.assertEqual(original.split('static func fileName', 1)[1].split('private func run', 1)[0], controller.split('static func fileName', 1)[1].split('private func run', 1)[0])
+        self.assertEqual((ROOT / 'upstream/Compositor/IO/DepthModel.swift').read_bytes(), (ROOT / 'build-source/Compositor/IO/DepthModel.swift').read_bytes())
+        terms = dict(line.split('\t') for line in (ROOT / 'translations/zh-Hans.tsv').read_text().splitlines() if line.strip())
+        for key in ['Volumetric Light', 'Extract Depth', 'Getting depth…', 'Depth Contrast', 'Keep Subject Clear', 'Export Layers as PNGs…']:
+            self.assertIn(key, terms)
+
     def test_document_models_unchanged(self):
         for original in (ROOT / 'upstream/Compositor/Document').rglob('*'):
             if original.is_file():

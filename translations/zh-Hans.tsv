@@ -832,3 +832,41 @@ How the light ends on the inside: low feathers it off softly from the edge, high
 Add Light	添加光源
 Light the subject from another side as well	从另一个方向照亮主体
 Applying…	正在应用…
+Volumetric Light	体积光
+Getting depth…	正在获取深度…
+Extract Depth	提取深度
+Close the filter and add the depth the haze goes by as a new layer: white is near, black is far	关闭滤镜，并将雾气使用的深度图添加为新图层：白色表示近处，黑色表示远处
+Click or drag on the canvas to move the light	在画布上单击或拖动以移动光源
+Choose the light's color	选择光源颜色
+Haze	雾气
+How thick the air is: haze lit by the light, thinner in front of the subject	空气中的雾气浓度：光源照亮雾气，主体前方的雾气更淡
+How far into the scene the haze begins: low reaches up to the camera, high leaves all but the farthest parts clear	雾气开始出现的场景深度：较低值延伸至相机前，较高值仅保留最远处的雾气
+Depth Contrast	深度对比度
+Spread out depths bunched together, such as a distant city, so the haze builds through them in steps; 0 keeps the depth as the model sees it	拉开远处城市等集中深度的差异，使雾气呈现层次；设为 0 保留模型原始深度
+How big the light is	光源的大小
+How bright the beams are	光束的亮度
+How far from the light the beams reach	光束从光源延伸的距离
+Shafts	光束分离
+How much the beams break up into separate shafts	光线分离成独立光束的程度
+Keep Subject Clear	保持主体清晰
+Keep the subject clear of the haze; off, it's hazed by its own distance, so a figure far off is misted	避免雾气遮盖主体；关闭时按主体距离添加雾气，远处人物也会被雾气笼罩
+Show Extras	显示辅助内容
+Show Layers	显示图层
+Hide Layers	隐藏图层
+Export Layers as PNGs…	将图层导出为 PNG…
+Export Layer as PNG…	将图层导出为 PNG…
+Export Layer as PNG	将图层导出为 PNG
+Choose a folder for the layers’ PNGs.	选择保存图层 PNG 的文件夹。
+Couldn’t export layers	无法导出图层
+A layer with no visible pixels, such as an adjustment layer, isn’t saved as a PNG.	没有可见像素的图层（例如调整图层）不会保存为 PNG。
+Color Picker (Light Color)	颜色选择器（光源颜色）
+Rename…	重命名…
+Delete Mask	删除蒙版
+Delete Selected Layers	删除所选图层
+Convert to 16-Bit	转换为 16 位
+Convert to 8-Bit	转换为 8 位
+Add Mask	添加蒙版
+Reveal All (White)	显示全部（白色）
+Hide All (Black)	隐藏全部（黑色）
+Enable Mask	启用蒙版
+Disable Mask	停用蒙版

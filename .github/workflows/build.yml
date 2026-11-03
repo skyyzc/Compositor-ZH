@@ -59,6 +59,15 @@ jobs:
           -only-testing:CompositorTests/LayerAlignTests
           -only-testing:CompositorTests/FloatingPanelTests
           -only-testing:CompositorTests/RimLightTests
+          -only-testing:CompositorTests/VolumetricLightTests
+          -only-testing:CompositorTests/LayerExportTests
+          -only-testing:CompositorTests/DeepLayerTests
+          -only-testing:CompositorTests/HistoryTests
+          -only-testing:CompositorTests/ImageSizeTests
+          -only-testing:CompositorTests/LayerAppearanceTests
+          -only-testing:CompositorTests/LayerTests
+          -only-testing:CompositorTests/LiveMaskTests
+          -only-testing:CompositorTests/SelectionTests
       - name: Package preview
         run: |
           mkdir -p dist

@@ -148,6 +148,35 @@ nonisolated func compositorZh(_ value: String) -> String {
                        return compositorZh(state.target.title)
                    }(),''')
     path.write_text(text)
+    # 1.6: layer menu strings stay on the presentation side of model commands.
+    path = output / 'Compositor/CompositorApp.swift'
+    text = path.read_text()
+    for expression in ['session.selectedClippingTitle', 'session.visibilityTitle', 'session.mergeTitle']:
+        text = text.replace('Button(' + expression + ')', 'Button(compositorZh(' + expression + '))')
+    path.write_text(text)
+    path = output / 'Compositor/UI/NativeLayerList.swift'
+    text = path.read_text()
+    text = re.sub(r'NSMenuItem\(title: ([^,\n]+), action:', r'NSMenuItem(title: compositorZh(\1), action:', text)
+    text = text.replace('NSMenu(title: "Add Mask")', 'NSMenu(title: compositorZh("Add Mask"))')
+    text = text.replace('menuItem.title == "Add Mask"', 'menuItem.title == compositorZh("Add Mask")')
+    path.write_text(text)
+    path = output / 'Compositor/ContentView.swift'
+    text = path.read_text().replace('Selection \\(size.width) × \\(size.height) px', '选区 \\(size.width) × \\(size.height) 像素')
+    path.write_text(text)
+    path = output / 'Compositor/IO/ProjectController.swift'
+    text = path.read_text()
+    for original, translated in [
+        ('Export \\(layers.count) Layers as PNGs', '将 \\(layers.count) 个图层导出为 PNG'),
+        ('“\\(existing[0].lastPathComponent)” already exists. Replace it?', '“\\(existing[0].lastPathComponent)”已存在。要替换吗？'),
+        ('\\(existing.count) of these files already exist in “\\(url.lastPathComponent)”. Replace them?', '其中 \\(existing.count) 个文件已存在于“\\(url.lastPathComponent)”。要替换吗？'),
+        ('“\\(empty[0])” has nothing to export', '“\\(empty[0])”没有可导出的内容'),
+        ('\\(empty.count) layers have nothing to export', '\\(empty.count) 个图层没有可导出的内容'),
+    ]:
+        text = text.replace(original, translated)
+    text = text.replace('panel.message = "Choose a folder for the layers’ PNGs."', 'panel.message = compositorZh("Choose a folder for the layers’ PNGs.")')
+    text = text.replace('panel.prompt = "Export"', 'panel.prompt = compositorZh("Export")')
+    text = text.replace('showError("Couldn’t export layers",', 'showError(compositorZh("Couldn’t export layers"),')
+    path.write_text(text)
     # Native dialog captions use String, not LocalizedStringKey.
     for path in (output / 'Compositor/IO').glob('*.swift'):
         if path.name == 'UpdateDriver.swift': continue  # Official updater is inactive.
