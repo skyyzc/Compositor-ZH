@@ -10,18 +10,18 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 不覆盖 /Applications/Compositor.app；中文预览为独立 local.compositor.zh。
 - 只翻译显示边界；不改文档模型、枚举 rawValue、快捷键/功能标识、用户文件名或图层名。构建成功不等于完整目标 VERIFIED。
 
-## 当前基线及交付（2026-10-28）
+## 当前基线及交付（2026-11-03）
 
 - 仓库 https://github.com/skyyzc/Compositor-ZH。
-- upstream.json 固定官方 1.5.12，提交 fe0a146d1a94476bbe68fb634ae9c31224eabced；官方发布时间 2026-10-27 18:39:20 UTC。
-- 汉化代码提交 97c31ced605a729edd545677a88f96b038929e41；831 条词条，保守静态缺词候选 0，不代表完整 UI 覆盖率。本轮补充 11 条译文。
-- 最新预览：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.5.12-zh.preview.1
-- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.5.12-zh.preview.1/Compositor-ZH-1.5.12-preview.1.zip
-- Release asset uploaded，12,539,173 字节；SHA256 cea9b5e9492422f7737152697f73d6e62048335ed1389bb97b2fa28ba9c85f35。Release 同时有 SHA256SUMS.txt。
-- 构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/40619047121 success；11 项本地化边界回归及 160 项相关上游测试通过。GitHub job 日志确认 TEST SUCCEEDED，含 7 个轮廓光测试方法；没有执行需单独启用的专用性能基准，不宣称速度倍数已验证。
-- 发布 https://github.com/skyyzc/Compositor-ZH/actions/runs/40620029883 success；原始 ZIP 校验、app 版本/标识检查、测试包清理、临时签名/完整性检查、打包上传均成功；gh REST 已确认资产 uploaded。
-- 上游项目格式仍为 20；本次新增轮廓光滤镜，不更改官方文档格式与模型。原始 Document 模型和 ProjectStore 与生成副本逐字节一致，不修改官方兼容逻辑。
-- 1.5.8 修复的格式 15/16 旧项目读取逻辑继续保留；相关 ProjectTests 仍在回归范围。旧应用可能无法打开新版保存的项目，请使用副本测试；历史预览均保留。
+- upstream.json 固定官方 1.6.1，提交 9b0892b5aea3aabe1e87af2468859a3c32184672；官方发布时间 2026-11-02 20:53:04 UTC。
+- 汉化代码提交 ca4d35eb7f4b6b6f006b0344270101f32af0e6f2；869 条词条，本轮新增 38 条；保守静态缺词候选 0，不代表完整 UI 覆盖率。
+- 最新预览：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.6.1-zh.preview.1
+- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.6.1-zh.preview.1/Compositor-ZH-1.6.1-preview.1.zip
+- Release asset uploaded，12,790,752 字节；SHA256 09081f0d3a70212bae00014c1e6b4eea0cd48a85feaeb51c9db542fab45f723b。Release 同时有 SHA256SUMS.txt。
+- 构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/41564126429 success，job 125681406194 日志 TEST SUCCEEDED；13 项本地化检查通过，289 个唯一上游测试方法记录通过。体积光样图/计时两个 opt-in 方法提前返回，未执行其主体；不作为效果/性能证据。
+- 发布 https://github.com/skyyzc/Compositor-ZH/actions/runs/41565192670 success；原始 ZIP 校验、app 版本/标识检查、测试包清理、临时签名/完整性检查、打包上传成功；gh REST 确认资产 uploaded。
+- 项目格式仍为 20；Document、ProjectStore、DepthModel 与生成副本逐字节一致，不修改官方兼容逻辑、深度模型来源/哈希和文件名函数。旧应用可能无法打开新版保存的项目，请使用副本测试；历史预览均保留。
+- 官方体积光首次使用下载约 2.6 MB 深度模型。本次回归覆盖等待/失败回退等逻辑，未验证真实网络下载、照片视觉效果或专用性能基准。
 
 ## 实现与证据边界
 
@@ -46,22 +46,12 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - automationId=compositor，ACTIVE，每天上海时间 10:00 返回本聊天检查官方正式发行版；版本及待处理状态无变化则保持安静，不重复构建/通知。
 - 新版本出现则继续翻译、定向回归和云端构建，仅在新产物、实质失败或必须用户操作时通知。未截图验收的版本仅发布预览；禁止自动替换用户已验收版本。
 - 任务涉及本地文件时需电脑开机、Codex 运行。
-- NEXT：等待用户对 1.5.12 轮廓光及既有界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
+- NEXT：等待用户对 1.6.1 体积光、提取深度、PNG 图层导出、多选及右键菜单的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
 
-## 本轮变更 1.5.12（2026-10-28）
+## 本轮变更 1.6.1（2026-11-03）
 
-- 适配轮廓光新增参数、主体识别提示、动态光源编号及颜色选择器标题，补充 11 条至 831 条词条；11 项本地化检查通过，静态候选 0 不等于完整 UI 覆盖。
-- 云端加入 RimLightTests；构建 job 122588293395 日志确认 TEST SUCCEEDED，160 个唯一测试方法通过，包含全部 7 个轮廓光方法。未执行专用性能基准。
-- 发布 run 40620029883 success，gh REST 已确认版本化 ZIP 和校验文件 uploaded；tag 指向构建源码 97c31ced605a729edd545677a88f96b038929e41。未重复构建。
-- Document 与 ProjectStore 仍保持官方字节，格式仍为 20。无桌面/应用操作，未安装或替换程序，旧预览均保留。整体仍 PARTIAL，新版照片效果、完整中文 UI 和体验待用户人工验收。
-
-## 当前工作 1.6.1（2026-11-03）
-
-- 官方正式版 1.6.1 发布于 2026-11-02 20:53:04 UTC，固定 9b0892b5aea3aabe1e87af2468859a3c32184672；汉化提交 df7535b7dd127c2a9e2f6efbdf258599efefc463。
-- 新增体积光、深度提取、PNG 图层导出、多选图层菜单及原生右键菜单适配；补充 38 条至 869 条词条。13 项本地化检查通过，静态候选 0；Document、ProjectStore、DepthModel 及导出文件名函数保持官方字节/逻辑。
-- 云端构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/41563358762 已提交；增加体积光、图层导出、深位深、选区、历史、蒙版及图像尺寸相关测试。项目格式仍为 20。
-- NEXT：确认构建与回归结果，再发布预览；当前可下载基线仍为 1.5.12。官方体积光首次使用下载约 2.6 MB 深度模型，真实模型下载/效果与 UI 仍未人工验收。
-
-- 首轮云端回归失败：4 个 LayerTests 菜单显示断言硬编码英文；其余 286 个唯一测试方法通过。已仅适配菜单标题断言，并增加运行时“Add Mask → 添加蒙版”检查；保留动作/启用条件/模型/撤销断言。修复后重新构建验证，首轮不能视为成功交付。
-
-- 修复后构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/41564126429 success，源码 ca4d35eb7f4b6b6f006b0344270101f32af0e6f2，job 125681406194 日志 TEST SUCCEEDED，289 个唯一方法通过（含两个体积光 opt-in 方法提前返回，未执行样图/计时主体）。13 项本地化检查通过；正准备预览发布。
+- 新增体积光、深度提取与参数/提示、PNG 图层导出、多选图层菜单、原生右键菜单及选区尺寸显示汉化；用户文件名与图层名保持原始值。
+- 原生菜单标题仅显示时翻译；Add Mask 的标题验证比较同步使用译文，动作 selector/启用条件不变。
+- 首轮构建 41563358762 编译成功、回归失败：4 个 LayerTests 菜单断言硬编码英文。已仅在生成的测试副本适配显示断言，并增加运行时 Add Mask → 添加蒙版检查；保留动作、启用条件、撤销和模型断言。13 项本地化检查与修复后云端回归通过。
+- 云端加入 VolumetricLightTests、LayerExportTests、DeepLayerTests、HistoryTests、ImageSizeTests、LayerAppearanceTests、LayerTests、LiveMaskTests、SelectionTests，确认本轮相关逻辑。289 方法记录包含两个未启用的体积光样图/计时方法，不宣称真实照片效果或性能验证。
+- 无桌面/应用操作，未安装或替换程序。整体仍 PARTIAL，新版完整中文 UI、真实模型下载及体验待用户人工验收。
