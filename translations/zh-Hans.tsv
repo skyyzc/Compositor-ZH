@@ -870,3 +870,14 @@ Reveal All (White)	显示全部（白色）
 Hide All (Black)	隐藏全部（黑色）
 Enable Mask	启用蒙版
 Disable Mask	停用蒙版
+Reduce Noise	减少杂色
+Preserve Details	保留细节
+Color Noise	彩色杂色
+How much grain is smoothed from the picture's brightness	平滑图像亮度杂色的程度
+How much fine texture and edges are kept while the grain is smoothed	平滑杂色时保留细微纹理和边缘的程度
+How much colored speckle is smoothed into the colors around it	将彩色杂点平滑融入周围颜色的程度
+Distances	间距
+New filter layer	新建滤镜图层
+Underlying pixels · alpha-weighted histogram	下方像素 · 按透明度加权的直方图
+Original pixels · alpha-weighted histogram	原始像素 · 按透明度加权的直方图
+Original pixels · selection and alpha-weighted histogram	原始像素 · 按选区和透明度加权的直方图

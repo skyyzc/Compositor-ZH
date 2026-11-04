@@ -127,6 +127,16 @@ class LocalizationRegression(unittest.TestCase):
         self.assertIn('coordinator.toggleMaskAction(nil)', text)
         self.assertIn('mergeItem.isEnabled == session.canMergeLayers', text)
 
+    def test_noise_and_appkit_footer_display(self):
+        footer = self.read('UI/LayersPanel.swift')
+        self.assertIn('super.init(title: compositorZh(title), action: #selector(choose)', footer)
+        self.assertIn('run = action', footer)
+        self.assertIn('Text(compositorZh(session.adjustmentOriginal', self.read('UI/LevelsSheet.swift'))
+        self.assertIn('draft.kind == .line ? "直线" : "形状"', self.read('ContentView.swift'))
+        terms = dict(line.split('\t') for line in (ROOT / 'translations/zh-Hans.tsv').read_text().splitlines() if line.strip())
+        for key in ['Reduce Noise', 'Preserve Details', 'Color Noise', 'Distances', 'New filter layer']:
+            self.assertIn(key, terms)
+
     def test_document_models_unchanged(self):
         for original in (ROOT / 'upstream/Compositor/Document').rglob('*'):
             if original.is_file():

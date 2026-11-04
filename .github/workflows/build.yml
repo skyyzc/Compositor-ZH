@@ -68,6 +68,10 @@ jobs:
           -only-testing:CompositorTests/LayerTests
           -only-testing:CompositorTests/LiveMaskTests
           -only-testing:CompositorTests/SelectionTests
+          -only-testing:CompositorTests/ReduceNoiseTests
+          -only-testing:CompositorTests/LayerDistancesTests
+          -only-testing:CompositorTests/LayersFooterTests
+          -only-testing:CompositorTests/MagicWandTests
       - name: Package preview
         run: |
           mkdir -p dist

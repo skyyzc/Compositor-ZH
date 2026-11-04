@@ -177,6 +177,21 @@ nonisolated func compositorZh(_ value: String) -> String {
     text = text.replace('panel.prompt = "Export"', 'panel.prompt = compositorZh("Export")')
     text = text.replace('showError("Couldn’t export layers",', 'showError(compositorZh("Couldn’t export layers"),')
     path.write_text(text)
+    # 1.6.3 footer menus moved to AppKit; translate labels at construction only.
+    path = output / 'Compositor/UI/LayersPanel.swift'
+    text = path.read_text()
+    needle = 'super.init(title: title, action: #selector(choose), keyEquivalent: "")'
+    if text.count(needle) != 1: raise SystemExit('Footer menu construction changed; review required.')
+    text = text.replace(needle, 'super.init(title: compositorZh(title), action: #selector(choose), keyEquivalent: "")')
+    for method in ['help', 'accessibilityLabel']:
+        text = re.sub(r'\.' + method + r'\((session.selectedEffect[^\n]+)\)', '.' + method + r'(compositorZh(\1))', text)
+    path.write_text(text)
+    path = output / 'Compositor/UI/LevelsSheet.swift'
+    text = re.sub(r'Text\((session.adjustmentOriginal[^\n]+)\)', r'Text(compositorZh(\1))', path.read_text())
+    path.write_text(text)
+    path = output / 'Compositor/ContentView.swift'
+    text = path.read_text().replace('Text("\\(draft.kind == .line ? "Line" : "Shape") \\(size.text)")', 'Text("\\(draft.kind == .line ? "直线" : "形状") \\(size.text)")')
+    path.write_text(text)
     # Native dialog captions use String, not LocalizedStringKey.
     for path in (output / 'Compositor/IO').glob('*.swift'):
         if path.name == 'UpdateDriver.swift': continue  # Official updater is inactive.
