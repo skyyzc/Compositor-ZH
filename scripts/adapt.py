@@ -192,6 +192,14 @@ nonisolated func compositorZh(_ value: String) -> String {
     path = output / 'Compositor/ContentView.swift'
     text = path.read_text().replace('Text("\\(draft.kind == .line ? "Line" : "Shape") \\(size.text)")', 'Text("\\(draft.kind == .line ? "直线" : "形状") \\(size.text)")')
     path.write_text(text)
+    # 1.6.4 appends a dynamic feather amount to selection dimensions.
+    path = output / 'Compositor/ContentView.swift'
+    text = path.read_text().replace(' · Feather \\($0) px', ' · 羽化 \\($0) 像素')
+    path.write_text(text)
+    path = output / 'Compositor/UI/LassoControls.swift'
+    text = path.read_text().replace('.accessibilityLabel(operation.rawValue)', '.accessibilityLabel(compositorZh(operation.rawValue))')
+    text = text.replace('.help("\\(operation.rawValue) the selection by this many pixels")', '.help("按此像素数\\(compositorZh(operation.rawValue))选区")')
+    path.write_text(text)
     # Native dialog captions use String, not LocalizedStringKey.
     for path in (output / 'Compositor/IO').glob('*.swift'):
         if path.name == 'UpdateDriver.swift': continue  # Official updater is inactive.

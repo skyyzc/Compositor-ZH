@@ -72,6 +72,7 @@ jobs:
           -only-testing:CompositorTests/LayerDistancesTests
           -only-testing:CompositorTests/LayersFooterTests
           -only-testing:CompositorTests/MagicWandTests
+          -only-testing:CompositorTests/SelectionFeatherTests
       - name: Package preview
         run: |
           mkdir -p dist

@@ -881,3 +881,6 @@ New filter layer	新建滤镜图层
 Underlying pixels · alpha-weighted histogram	下方像素 · 按透明度加权的直方图
 Original pixels · alpha-weighted histogram	原始像素 · 按透明度加权的直方图
 Original pixels · selection and alpha-weighted histogram	原始像素 · 按选区和透明度加权的直方图
+Reset colors to black and white (D)	将颜色重置为黑白（D）
+Reset colors	重置颜色
+How many pixels to expand, contract or feather the selection by	扩展、收缩或羽化选区的像素数

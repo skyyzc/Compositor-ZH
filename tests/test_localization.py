@@ -14,7 +14,9 @@ class LocalizationRegression(unittest.TestCase):
         self.assertIn('Text(compositorZh(title))', canvas)  # dimension and CyclePill
         lasso = self.read('UI/LassoControls.swift')
         self.assertIn('Text(compositorZh($0.rawValue)).tag($0)', lasso)
-        self.assertIn('Button(compositorZh(title), action: action)', lasso)
+        self.assertIn('.accessibilityLabel(compositorZh(operation.rawValue))', lasso)
+        self.assertIn('session.modifySelection(operation, by: session.selectionModifyAmount)', lasso)
+        self.assertIn('按此像素数', lasso)
         self.assertIn('Text(compositorZh(session.tool == .marquee', lasso)
 
     def test_blend_mode_uses_stable_identity(self):
