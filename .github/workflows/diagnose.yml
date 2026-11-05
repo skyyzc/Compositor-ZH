@@ -18,6 +18,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPORT_RUN: ${{ inputs.run_id }}
         run: |
-          gh run download "$REPORT_RUN" --repo skyyzc/Compositor-ZH --name regression-results --dir evidence
+          gh run download "$REPORT_RUN" --repo skyyzc/Compositor-ZH --name regression-results --dir evidence/Regression.xcresult
           xcrun xcresulttool get test-results summary --path evidence/Regression.xcresult
           xcrun xcresulttool get test-results tests --path evidence/Regression.xcresult
