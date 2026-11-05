@@ -1,0 +1,23 @@
+name: Inspect regression evidence
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        required: true
+        type: string
+permissions:
+  actions: read
+  contents: read
+jobs:
+  inspect:
+    runs-on: macos-26
+    timeout-minutes: 10
+    steps:
+      - name: Read existing regression report
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPORT_RUN: ${{ inputs.run_id }}
+        run: |
+          gh run download "$REPORT_RUN" --repo skyyzc/Compositor-ZH --name regression-results --dir evidence
+          xcrun xcresulttool get test-results summary --path evidence/Regression.xcresult
+          xcrun xcresulttool get test-results tests --path evidence/Regression.xcresult
