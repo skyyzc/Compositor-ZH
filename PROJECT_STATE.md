@@ -71,3 +71,5 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 
 - 1.6.4 首轮 41952636447 编译通过，回归超时取消；日志记录 FloatingPanelTests 的 dockedPlacementLeavesTheSavedFilterPosition、cameraRawDocksToTheDocumentWindow 失败，根因尚 UNKNOWN。并行宿主在同一云端桌面运行，为可能干扰来源，不能直接认定为产品或汉化错误。
 - 超时留下的 xcresult 未完成（无 Info.plist），云端只读诊断 41957705781/41957843347 无法解析；不据此升级验证状态。已关闭测试并行并启用 120–180 秒单项超时，完整保留原回归范围重新验证。
+
+- 串行重跑 41957994722 success，job 127017392098，源码 e3019cdda5d3f331a372754a75c5cbf478d5f11f；日志 TEST SUCCEEDED、34 suites/312 tests passed after 51.957 seconds。之前两项浮动面板失败及全套回归均通过，支持并发测试干扰判断，但未做完整因果隔离。保留串行和单项超时设置，准备发布。
