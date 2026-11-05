@@ -55,3 +55,19 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 首轮构建 41563358762 编译成功、回归失败：4 个 LayerTests 菜单断言硬编码英文。已仅在生成的测试副本适配显示断言，并增加运行时 Add Mask → 添加蒙版检查；保留动作、启用条件、撤销和模型断言。13 项本地化检查与修复后云端回归通过。
 - 云端加入 VolumetricLightTests、LayerExportTests、DeepLayerTests、HistoryTests、ImageSizeTests、LayerAppearanceTests、LayerTests、LiveMaskTests、SelectionTests，确认本轮相关逻辑。289 方法记录包含两个未启用的体积光样图/计时方法，不宣称真实照片效果或性能验证。
 - 无桌面/应用操作，未安装或替换程序。整体仍 PARTIAL，新版完整中文 UI、真实模型下载及体验待用户人工验收。
+
+## 当前工作 1.6.3（2026-11-04）
+
+- 官方 1.6.3 发布于 2026-11-03 21:30:23 UTC，固定 5c3489e84c2d22da18566f40079f14f86296e57c；汉化提交 692602a97c6e38530e742e218d91e3634cd079c4。
+- 新增减少杂色、间距、滤镜图层菜单，补充 11 条至 880 词条；适配重构后的原生 FooterMenu 与色阶动态说明、形状尺寸文字，14 项本地化检查通过，静态候选 0。
+- 云端构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/41757626545 已提交，增加 ReduceNoiseTests、LayerDistancesTests、LayersFooterTests、MagicWandTests。Document/ProjectStore/DepthModel 保持官方字节，格式升至 21。
+- NEXT：确认构建/回归后发布预览，发布前可下载版本仍为 1.6.1；实际中文 UI/照片效果仍待人工验收。
+
+## 当前工作 1.6.4（2026-11-05）
+
+- 已确认 1.6.3 构建 41757626545 success，尚未发布；官方随后发布 1.6.4（2026-11-05 01:16:20 UTC），直接继续迁移新版，避免交付过时预览。
+- 固定 f2add91afe7a63d789cf096cca34b797c4c0f0f7；汉化源码 08eb18474f99ebc7608232bd75d42c1f30733699。新增 3 条词条共 883；适配重构后的选区图标辅助标签和羽化状态文字，14 项本地化检查通过，静态候选 0。
+- 云端构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/41952636447 进行中，增加 SelectionFeatherTests；格式仍为 21。NEXT：确认回归后发布新版预览，当前可下载基线仍为 1.6.1。
+
+- 1.6.4 首轮 41952636447 编译通过，回归超时取消；日志记录 FloatingPanelTests 的 dockedPlacementLeavesTheSavedFilterPosition、cameraRawDocksToTheDocumentWindow 失败，根因尚 UNKNOWN。并行宿主在同一云端桌面运行，为可能干扰来源，不能直接认定为产品或汉化错误。
+- 超时留下的 xcresult 未完成（无 Info.plist），云端只读诊断 41957705781/41957843347 无法解析；不据此升级验证状态。已关闭测试并行并启用 120–180 秒单项超时，完整保留原回归范围重新验证。
