@@ -10,18 +10,16 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 不覆盖 /Applications/Compositor.app；中文预览为独立 local.compositor.zh。
 - 只翻译显示边界；不改文档模型、枚举 rawValue、快捷键/功能标识、用户文件名或图层名。构建成功不等于完整目标 VERIFIED。
 
-## 当前基线及交付（2026-11-05）
+## 当前基线及交付（2026-11-08）
 
-- 仓库 https://github.com/skyyzc/Compositor-ZH。
-- upstream.json 固定官方 1.6.4，提交 f2add91afe7a63d789cf096cca34b797c4c0f0f7；官方发布时间 2026-11-05 01:16:20 UTC。
-- 汉化代码提交 e3019cdda5d3f331a372754a75c5cbf478d5f11f；883 条词条，包含 1.6.3 新增 11 条及 1.6.4 新增 3 条；保守静态缺词候选 0，不代表完整 UI 覆盖率。
-- 最新预览：https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.6.4-zh.preview.1
-- ZIP：https://github.com/skyyzc/Compositor-ZH/releases/download/v1.6.4-zh.preview.1/Compositor-ZH-1.6.4-preview.1.zip
-- Release asset uploaded，12,858,706 字节；SHA256 7d593a6e4f66abc8df042abacea7ec2281494efac96da62be969d9cd412ce4b5。Release 同时有 SHA256SUMS.txt。
-- 构建 https://github.com/skyyzc/Compositor-ZH/actions/runs/41957994722 success，job 127017392098 日志 TEST SUCCEEDED；14 项本地化检查通过；串行回归日志确认 34 套件、312 项测试通过（51.957 秒）。体积光样图/计时两个 opt-in 方法提前返回，未执行其主体；不作为效果/性能证据。
-- 发布 https://github.com/skyyzc/Compositor-ZH/actions/runs/41959147158 success；原始 ZIP 校验、app 版本/标识检查、测试包清理、临时签名/完整性检查、打包上传成功；gh REST 确认资产 uploaded。
-- 项目格式升至 21；Document、ProjectStore、DepthModel 与生成副本逐字节一致，不修改官方兼容逻辑、深度模型来源/哈希和文件名函数。旧应用可能无法打开新版保存的项目，请使用副本测试；历史预览均保留。
-- 官方体积光首次使用下载约 2.6 MB 深度模型。本次回归覆盖等待/失败回退等逻辑，未验证真实网络下载、照片视觉效果或专用性能基准。
+- 官方 1.6.6，upstream.json 固定 2f507800bc4b32db6b31d34a822cbfc577bf46cf；汉化源码 c5cf1786f56e285f92b15482d34c155ec41a72ab。
+- 885 条词条，静态候选 0；14 项本地化边界检查通过。完整 UI 仍待人工验收。
+- 最新预览 https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.6.6-zh.preview.1
+- ZIP https://github.com/skyyzc/Compositor-ZH/releases/download/v1.6.6-zh.preview.1/Compositor-ZH-1.6.6-preview.1.zip
+- 资产 uploaded，12,898,427 字节；SHA256 86ad27d237ca716c8d6c60ed9cd675174b72ee560352c21edc8cbb05e30b25d3，附 SHA256SUMS.txt。
+- 构建 42437083715 success，job 128598123663；TEST SUCCEEDED，38 套件、325 项测试通过（37.137 秒）。新增 BrushRecoveryTests、StrokeEffectTests、ImageSourceTests、CameraRawSliderTests。体积光样图/计时 opt-in 主体未执行。
+- 发布 42437701311 success，版本/标识/校验/签名检查及资产上传成功。
+- 格式仍为 21，Document、ProjectStore、DepthModel 保持官方字节；项目副本测试。真实模型下载、完整 UI、照片效果与性能体验待人工验收。
 
 ## 实现与证据边界
 
@@ -46,7 +44,7 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - automationId=compositor，ACTIVE，每天上海时间 10:00 返回本聊天检查官方正式发行版；版本及待处理状态无变化则保持安静，不重复构建/通知。
 - 新版本出现则继续翻译、定向回归和云端构建，仅在新产物、实质失败或必须用户操作时通知。未截图验收的版本仅发布预览；禁止自动替换用户已验收版本。
 - 任务涉及本地文件时需电脑开机、Codex 运行。
-- NEXT：等待用户对 1.6.4 减少杂色、图层底部菜单、间距及选区图标/羽化状态的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
+- NEXT：等待用户对 1.6.6 颜色选择器、画笔恢复、描边及统一滑块的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
 
 ## 本轮变更 1.6.3 → 1.6.4（2026-11-05）
 
@@ -56,3 +54,8 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 关闭测试并行、增加单项超时后，41957994722 同范围全部通过，之前失败的浮动面板检查也通过，支持并行测试宿主干扰判断，尚未完整因果隔离。未删测试、放宽断言或修改产品逻辑。保留串行设置；diagnose.yml 可读取完整的既有回归制品，不触发重建。
 - 云端增加减少杂色、图层间距、底部布局、魔棒与选区羽化检查。312 项包含参数化测试；体积光样图/计时两个 opt-in 方法未执行主体，不作为照片/性能证据。串行日志格式改为 ✔ Test / ✔ Suite，不能沿用旧 Test case 正则统计成 0。
 - 已发布预览，源码 tag 指向 e3019cdda5d3f331a372754a75c5cbf478d5f11f；资产 uploaded。无桌面/应用操作，未安装或替换程序。整体仍 PARTIAL，真实 UI、模型下载及照片效果待人工验收。
+
+## 本轮变更 1.6.6（2026-11-08）
+
+- 复用既有适配，补充颜色选择器两条提示，词库 885。跟进官方画笔恢复、描边、滑块与导出入口调整。快捷键按官方更新保留，未自行改功能标识或用户内容。
+- 14 项本地化检查及串行云端相关回归通过，已发布预览。未操作桌面或安装应用。整体 PARTIAL，人工验收缺口继续保留。
