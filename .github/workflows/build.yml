@@ -77,6 +77,10 @@ jobs:
           -only-testing:CompositorTests/LayersFooterTests
           -only-testing:CompositorTests/MagicWandTests
           -only-testing:CompositorTests/SelectionFeatherTests
+          -only-testing:CompositorTests/BrushRecoveryTests
+          -only-testing:CompositorTests/StrokeEffectTests
+          -only-testing:CompositorTests/ImageSourceTests
+          -only-testing:CompositorTests/CameraRawSliderTests
       - name: Package preview
         run: |
           mkdir -p dist

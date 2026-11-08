@@ -884,3 +884,5 @@ Original pixels · selection and alpha-weighted histogram	原始像素 · 按选
 Reset colors to black and white (D)	将颜色重置为黑白（D）
 Reset colors	重置颜色
 How many pixels to expand, contract or feather the selection by	扩展、收缩或羽化选区的像素数
+The color before: click to go back to it	原来的颜色：单击可恢复
+Current color	当前颜色
