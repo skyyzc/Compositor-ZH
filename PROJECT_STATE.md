@@ -10,16 +10,13 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 不覆盖 /Applications/Compositor.app；中文预览为独立 local.compositor.zh。
 - 只翻译显示边界；不改文档模型、枚举 rawValue、快捷键/功能标识、用户文件名或图层名。构建成功不等于完整目标 VERIFIED。
 
-## 当前基线及交付（2026-11-08）
+## 当前基线及交付（2026-11-16）
 
-- 官方 1.6.6，upstream.json 固定 2f507800bc4b32db6b31d34a822cbfc577bf46cf；汉化源码 c5cf1786f56e285f92b15482d34c155ec41a72ab。
-- 885 条词条，静态候选 0；14 项本地化边界检查通过。完整 UI 仍待人工验收。
-- 最新预览 https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.6.6-zh.preview.1
-- ZIP https://github.com/skyyzc/Compositor-ZH/releases/download/v1.6.6-zh.preview.1/Compositor-ZH-1.6.6-preview.1.zip
-- 资产 uploaded，12,898,427 字节；SHA256 86ad27d237ca716c8d6c60ed9cd675174b72ee560352c21edc8cbb05e30b25d3，附 SHA256SUMS.txt。
-- 构建 42437083715 success，job 128598123663；TEST SUCCEEDED，38 套件、325 项测试通过（37.137 秒）。新增 BrushRecoveryTests、StrokeEffectTests、ImageSourceTests、CameraRawSliderTests。体积光样图/计时 opt-in 主体未执行。
-- 发布 42437701311 success，版本/标识/校验/签名检查及资产上传成功。
-- 格式仍为 21，Document、ProjectStore、DepthModel 保持官方字节；项目副本测试。真实模型下载、完整 UI、照片效果与性能体验待人工验收。
+- 官方 1.6.7，固定源码 1fba773fd5db5b32ff6c780b62f7456ebf777597。汉化提交 7275b3a863b2a99dd5181c594c67e0be88199250。
+- 补译画笔抗锯齿提示，词库共 886 条，静态候选为 0。项目格式 21。
+- [1.6.7 中文预览](https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.6.7-zh.preview.1)。ZIP 已上传，12,896,843 字节，SHA256 为 6ee0f50f0241b765827a984ff7f5d928c7703bf5d4b7c4ec66d962649b26ef79，附 SHA256SUMS.txt。
+- [构建 43839055246](https://github.com/skyyzc/Compositor-ZH/actions/runs/43839055246) 通过 14 项本地化检查和 40 套件、328 项云端测试，含铅笔与滚动缩放。实际界面及绘制体验待截图验收。
+- [发布 43840386745](https://github.com/skyyzc/Compositor-ZH/actions/runs/43840386745) 成功，已核对下载资产。
 
 ## 实现与证据边界
 
@@ -44,7 +41,7 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - automationId=compositor，ACTIVE，每天上海时间 10:00 返回本聊天检查官方正式发行版；版本及待处理状态无变化则保持安静，不重复构建/通知。
 - 新版本出现则继续翻译、定向回归和云端构建，仅在新产物、实质失败或必须用户操作时通知。未截图验收的版本仅发布预览；禁止自动替换用户已验收版本。
 - 任务涉及本地文件时需电脑开机、Codex 运行。
-- NEXT：等待用户对 1.6.6 颜色选择器、画笔恢复、描边及统一滑块的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
+- NEXT：等待用户对 1.6.7 画笔抗锯齿和滚动缩放的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
 
 ## 本轮变更 1.6.3 → 1.6.4（2026-11-05）
 
