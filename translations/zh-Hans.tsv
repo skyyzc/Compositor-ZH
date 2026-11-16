@@ -886,3 +886,4 @@ Reset colors	重置颜色
 How many pixels to expand, contract or feather the selection by	扩展、收缩或羽化选区的像素数
 The color before: click to go back to it	原来的颜色：单击可恢复
 Current color	当前颜色
+Smooth edges; turn off for hard pixel edges, like a pencil	平滑边缘；关闭后可画出类似铅笔的硬边像素线条
