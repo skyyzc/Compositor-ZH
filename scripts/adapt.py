@@ -86,7 +86,7 @@ nonisolated func compositorZh(_ value: String) -> String {
     path = output / 'Compositor/UI/ExportAsSheet.swift'
     text = path.read_text()
     text = text.replace('Picker(channel.rawValue,', 'Picker(compositorZh(channel.rawValue),')
-    text = text.replace('Text(format == .channelPack ?', 'Text(compositorZh(format == .channelPack ?')
+    text = text.replace('Text(format == .psd ?', 'Text(compositorZh(format == .psd ?', 1)
     text = text.replace(': "sRGB")', ': "sRGB"))')
     text = text.replace('"CMYK – \\(profile?.name ?? "No profile")"', '"CMYK – \\(profile?.name ?? "无配置文件")"')
     text = text.replace('What fills the \\(channel.rawValue.lowercased()) channel: a layer or group read as grayscale, or solid black or white', '\\(compositorZh(channel.rawValue))通道的内容：按灰度读取的图层或组，或纯黑、纯白')
@@ -199,6 +199,31 @@ nonisolated func compositorZh(_ value: String) -> String {
     path = output / 'Compositor/UI/LassoControls.swift'
     text = path.read_text().replace('.accessibilityLabel(operation.rawValue)', '.accessibilityLabel(compositorZh(operation.rawValue))')
     text = text.replace('.help("\\(operation.rawValue) the selection by this many pixels")', '.help("按此像素数\\(compositorZh(operation.rawValue))选区")')
+    path.write_text(text)
+    # Localize shape captions and the PSD export report without changing layer names.
+    path = output / 'Compositor/UI/ShapeControls.swift'
+    text = path.read_text().replace('Text(showsStroke ? "Fill" : "Color")', 'Text(compositorZh(showsStroke ? "Fill" : "Color"))')
+    text = re.sub(r'\.help\(((?:editsLine|editsSelection|session\.displayedCornerRadius)[^)]*?)\)', r'.help(compositorZh(\1))', text)
+    path.write_text(text)
+
+    path = output / 'Compositor/IO/PSD/PSDWriter.swift'
+    text = path.read_text()
+    for message, translation in [
+        ('Text drawn as pixels: ', '已栅格化文字：'),
+        ('Effects drawn into the pixels: ', '已将效果合成到像素中：'),
+        ('Adjustment layers left out: ', '已省略调整图层：'),
+    ]:
+        text = text.replace('"' + message, '"' + translation)
+    text = text.replace(r' and \(matching.count - 3) more', r'，另有 \(matching.count - 3) 个')
+    path.write_text(text)
+    # The export test also checks the visible report text.
+    path = output / 'CompositorTests/PSDExportTests.swift'
+    path.write_text(path.read_text().replace('"Adjustment layers left out: “Levels”"', '"已省略调整图层：“Levels”"'))
+
+    path = output / 'Compositor/UI/ExportAsSheet.swift'
+    text = path.read_text().replace('Other formats: TIFF, PDF and GIF', '其他格式：TIFF、PDF 和 GIF')
+    text = text.replace(', EXR to keep light brighter than white', '、可保留超白亮度的 EXR')
+    text = text.replace(', Channel Pack for game textures, and PSD to keep the layers for Photoshop', '、用于游戏纹理的通道打包，以及为 Photoshop 保留图层的 PSD')
     path.write_text(text)
     # Native dialog captions use String, not LocalizedStringKey.
     for path in (output / 'Compositor/IO').glob('*.swift'):

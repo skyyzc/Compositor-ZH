@@ -40,7 +40,7 @@ class LocalizationRegression(unittest.TestCase):
         export = self.read('UI/ExportAsSheet.swift')
         self.assertIn('Picker(compositorZh(channel.rawValue),', export)
         self.assertIn('Text(layer.name).tag(ChannelPack.Source.layer(layer.id))', export)
-        self.assertIn('Text(compositorZh(format == .channelPack ?', export)
+        self.assertIn('Text(compositorZh(format == .psd ?', export)
         self.assertIn('compositorZh("Search Fonts")', self.read('UI/FontListPanel.swift'))
         self.assertIn('Button(compositorZh(kind.rawValue + "…"))', self.read('CompositorApp.swift'))
         project = (ROOT / 'build-source/Compositor.xcodeproj/project.pbxproj').read_text()

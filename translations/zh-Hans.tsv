@@ -887,3 +887,16 @@ How many pixels to expand, contract or feather the selection by	扩展、收缩�
 The color before: click to go back to it	原来的颜色：单击可恢复
 Current color	当前颜色
 Smooth edges; turn off for hard pixel edges, like a pencil	平滑边缘；关闭后可画出类似铅笔的硬边像素线条
+Stroke color	描边颜色
+Stroke drawn inside the shape, in pixels. 0 draws none	在形状内侧绘制描边，单位为像素。设为 0 可关闭描边。
+Changes	导出变更
+Layers, folders and masks kept · sRGB	保留图层、文件夹和蒙版 · sRGB
+Color Picker (Fill Color)	颜色选择器（填充颜色）
+Color Picker (Stroke Color)	颜色选择器（描边颜色）
+Color of the selected line	所选直线的颜色
+Color of the next line	下一条直线的颜色
+Fill color of the selected shape	所选形状的填充颜色
+Dashes of the selected line; they grow with its width	所选直线的虚线段随线宽增大
+How this line's ends are finished	此直线的端点样式
+Round this rectangle's corners by this many pixels; 0 keeps them square	设置此矩形的圆角半径（像素），设为 0 保留直角
+Set a radius above 0 to use smooth corners.	将半径设为大于 0 的值以使用平滑圆角。

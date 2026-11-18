@@ -80,6 +80,11 @@ jobs:
           -only-testing:CompositorTests/BrushRecoveryTests
           -only-testing:CompositorTests/PencilTests
           -only-testing:CompositorTests/ScrollZoomTests
+          -only-testing:CompositorTests/PSDExportTests
+          -only-testing:CompositorTests/LayerRowDragTests
+          -only-testing:CompositorTests/ColorPickerTests
+          -only-testing:CompositorTests/SelectionClipboardTests
+          -only-testing:CompositorTests/TransformTests
           -only-testing:CompositorTests/StrokeEffectTests
           -only-testing:CompositorTests/ImageSourceTests
           -only-testing:CompositorTests/CameraRawSliderTests
