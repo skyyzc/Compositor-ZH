@@ -10,13 +10,13 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 不覆盖 /Applications/Compositor.app；中文预览为独立 local.compositor.zh。
 - 只翻译显示边界；不改文档模型、枚举 rawValue、快捷键/功能标识、用户文件名或图层名。构建成功不等于完整目标 VERIFIED。
 
-## 当前基线及交付（2026-11-18）
+## 当前基线及交付（2026-11-20）
 
-- 官方 1.6.13，固定源码 447cbc428bd46e56b476700d69234479eac6514e。汉化提交 75b41a506de2bee2953ff6d6974f1bd4671f7c66。
-- 形状描边、填充颜色选择器及 PSD 导出报告汉化，词库 899 条，静态候选 0。官方项目格式升至 22。
-- [中文预览](https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.6.13-zh.preview.1) ZIP 已上传，13,153,924 字节，SHA256 72732de71e03cb0f3617b56649659ecfd4cac32fb18aa45d3e1c52cf9c91f94b，附 SHA256SUMS.txt。
-- [构建 44241114471](https://github.com/skyyzc/Compositor-ZH/actions/runs/44241114471) 通过 14 项本地化检查和 45 套件、387 项云端测试，包含 PSD 导出、形状编辑、颜色选择和图层拖放。PSD 测试对导出报告文字的预期已随汉化更新。实际界面待截图验收。
-- [发布 44242513522](https://github.com/skyyzc/Compositor-ZH/actions/runs/44242513522) 成功，已核对下载资产。
+- 官方 1.6.14，固定源码 d37eb51a6cb6e78a18adbfe4cccbde974e094e35。汉化提交 fd98d570d0a430e66dbd1341f01639a91134b085。
+- 本次官方仅修改蒙版绘制预览逻辑、对应测试及版本元数据；无新增或变化 UI 文案。复用 899 条译文，静态候选 0。项目格式仍为 22。
+- [中文预览](https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.6.14-zh.preview.1) ZIP 已上传，13,155,822 字节，SHA256 189d03ac3ff601d1b971b422704c45fdcc9bc5f50fcf24589f3ffb2f7ede66e2，附 SHA256SUMS.txt。
+- [构建 44657762987](https://github.com/skyyzc/Compositor-ZH/actions/runs/44657762987) 通过 14 项本地化检查和 46 套件、394 项云端测试（63.307 秒），日志 TEST SUCCEEDED。新增 TiledLayerTests 覆盖蒙版预览瓦片接缝修复，该套件通过；生成 Document 模型与固定上游一致。实际界面待截图验收。
+- [发布 44659226918](https://github.com/skyyzc/Compositor-ZH/actions/runs/44659226918) 成功，已核对下载资产 uploaded、大小和摘要。未操作桌面、启动、安装或替换应用。
 
 ## 实现与证据边界
 
@@ -41,7 +41,7 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - automationId=compositor，ACTIVE，每天上海时间 10:00 返回本聊天检查官方正式发行版；版本及待处理状态无变化则保持安静，不重复构建/通知。
 - 新版本出现则继续翻译、定向回归和云端构建，仅在新产物、实质失败或必须用户操作时通知。未截图验收的版本仅发布预览；禁止自动替换用户已验收版本。
 - 任务涉及本地文件时需电脑开机、Codex 运行。
-- NEXT：等待用户对 1.6.13 形状描边、颜色选择器与 PSD 导出的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
+- NEXT：等待用户对 1.6.14 蒙版绘制及既有形状描边、颜色选择器与 PSD 导出的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
 
 ## 本轮变更 1.6.3 → 1.6.4（2026-11-05）
 
