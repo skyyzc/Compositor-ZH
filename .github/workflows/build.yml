@@ -70,6 +70,7 @@ jobs:
           -only-testing:CompositorTests/ImageSizeTests
           -only-testing:CompositorTests/LayerAppearanceTests
           -only-testing:CompositorTests/LayerTests
+          -only-testing:CompositorTests/TiledLayerTests
           -only-testing:CompositorTests/LiveMaskTests
           -only-testing:CompositorTests/SelectionTests
           -only-testing:CompositorTests/ReduceNoiseTests
