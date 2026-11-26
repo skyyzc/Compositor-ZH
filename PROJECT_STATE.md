@@ -10,13 +10,13 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 不覆盖 /Applications/Compositor.app；中文预览为独立 local.compositor.zh。
 - 只翻译显示边界；不改文档模型、枚举 rawValue、快捷键/功能标识、用户文件名或图层名。构建成功不等于完整目标 VERIFIED。
 
-## 当前基线及交付（2026-11-22）
+## 当前基线及交付（2026-11-26）
 
-- 官方 1.7.0，固定源码 8391036b907862af3be38fdfb3dc234ddfcf8885。汉化提交 dc87b999e98c2f956360dc02e1d0077c6cec863f。
-- 官方修复图层拖放/Option 复制、剪贴蒙版显示及复制关系、变换与字号输入后焦点；无新增或变化 UI 文案。复用 899 条译文，静态候选 0。项目格式仍为 22。
-- [中文预览](https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.7.0-zh.preview.1) ZIP 已上传，13,188,434 字节，SHA256 97f55b7004e80216adf6a02c04aa919cadc99127a93c0e88d4e69873d1b87d0c，附 SHA256SUMS.txt。
-- [构建 44974188456](https://github.com/skyyzc/Compositor-ZH/actions/runs/44974188456) 通过 14 项本地化检查和 46 套件、399 项云端测试（43.330 秒），日志 TEST SUCCEEDED。LayerRowDragTests、LiveMaskTests 新增上游回归通过；生成 Document 模型与固定上游一致。实际中文布局和交互待人工截图与操作验收。
-- [发布 44974811347](https://github.com/skyyzc/Compositor-ZH/actions/runs/44974811347) 成功，已核对下载资产 uploaded、大小和摘要。未操作桌面、启动、安装或替换应用。
+- 官方 1.7.1，固定源码 989e3d1a2a9f421f6389e8e323993ce7f7e30c88。汉化提交 465df356315af95a00d0b98c6e12516e0312976c。
+- 官方修复渐变蒙版确认前不显示预览；无新增或变化 UI 文案。复用 899 条译文，静态候选 0。项目格式仍为 22。
+- [中文预览](https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.7.1-zh.preview.1) ZIP 已上传，13,188,838 字节，SHA256 53aa556a71d3da563526aaf75aa30160be354c0e6107641729bde1428dc7b02d，附 SHA256SUMS.txt。
+- [构建 45740105497](https://github.com/skyyzc/Compositor-ZH/actions/runs/45740105497) 通过 14 项本地化检查和 46 套件、400 项云端测试（68.530 秒），日志 TEST SUCCEEDED；GPUCanvasTests 新增上游回归通过。生成 Document 模型与固定上游一致。实际中文布局和渐变蒙版交互待人工验收。
+- [发布 45741561377](https://github.com/skyyzc/Compositor-ZH/actions/runs/45741561377) 成功，已核对下载资产 uploaded、大小和摘要。未操作桌面、启动、安装或替换应用。
 
 ## 实现与证据边界
 
@@ -41,7 +41,7 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - automationId=compositor，ACTIVE，每天上海时间 10:00 返回本聊天检查官方正式发行版；版本及待处理状态无变化则保持安静，不重复构建/通知。
 - 新版本出现则继续翻译、定向回归和云端构建，仅在新产物、实质失败或必须用户操作时通知。未截图验收的版本仅发布预览；禁止自动替换用户已验收版本。
 - 任务涉及本地文件时需电脑开机、Codex 运行。
-- NEXT：等待用户对 1.7.0 图层复制、剪贴蒙版及既有编辑/导出界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
+- NEXT：等待用户对 1.7.1 渐变蒙版及既有编辑/导出界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
 
 ## 本轮变更 1.6.3 → 1.6.4（2026-11-05）
 
