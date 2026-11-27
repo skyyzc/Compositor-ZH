@@ -241,4 +241,11 @@ nonisolated func compositorZh(_ value: String) -> String {
     text = text.replace('.title == session.mergeTitle', '.title == compositorZh(session.mergeTitle)')
     text = text.replace('let titles = menu.items.map(\\.title)', 'let titles = menu.items.map(\\.title)\n        #expect(compositorZh("Add Mask") == "添加蒙版")')
     path.write_text(text)
+    # Movie timeline dynamic accessibility/help and inline failure display only.
+    path = output / 'Compositor/UI/MovieFramePicker.swift'
+    text = path.read_text()
+    text = text.replace('observer == nil ? "Play" : "Pause"', 'compositorZh(observer == nil ? "Play" : "Pause")')
+    text = text.replace('muted ? "Unmute movie" : "Mute movie"', 'compositorZh(muted ? "Unmute movie" : "Mute movie")')
+    text = text.replace('Text(failure)', 'Text(compositorZh(failure))')
+    path.write_text(text)
     return changes

@@ -900,3 +900,13 @@ Dashes of the selected line; they grow with its width	所选直线的虚线段�
 How this line's ends are finished	此直线的端点样式
 Round this rectangle's corners by this many pixels; 0 keeps them square	设置此矩形的圆角半径（像素），设为 0 保留直角
 Set a radius above 0 to use smooth corners.	将半径设为大于 0 的值以使用平滑圆角。
+Movie playhead	视频播放位置
+Grab Frame	截取帧
+Relink…	重新链接…
+Unmute movie	取消视频静音
+Mute movie	视频静音
+Movie unavailable. Right-click the timeline to relink and play.	视频不可用。右键单击时间轴，重新链接后播放。
+Movie unavailable. Right-click the timeline to relink and scrub.	视频不可用。右键单击时间轴，重新链接后浏览帧。
+Select Movie Frame	选择视频帧
+Grab Movie Frame	截取视频帧
+Relink Movie	重新链接视频

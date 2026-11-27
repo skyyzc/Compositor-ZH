@@ -58,6 +58,10 @@ jobs:
           -only-testing:CompositorTests/ProjectTests
           -only-testing:CompositorTests/AdjustmentLayerTests
           -only-testing:CompositorTests/AdjustmentCacheTests
+          -only-testing:CompositorTests/MovieFrameTests
+          -only-testing:CompositorTests/BrushTests
+          -only-testing:CompositorTests/BrushIntersectionTests
+          -only-testing:CompositorTests/RasterSnapshotTests
           -only-testing:CompositorTests/GPUCanvasTests
           -only-testing:CompositorTests/CropTests
           -only-testing:CompositorTests/LayerAlignTests
