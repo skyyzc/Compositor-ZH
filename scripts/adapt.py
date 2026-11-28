@@ -112,6 +112,8 @@ nonisolated func compositorZh(_ value: String) -> String {
     path = output / 'Compositor/UI/GIFTimeline.swift'
     if path.exists():
         text = path.read_text().replace('.help(isPlaying ? "Pause" : "Play")', '.help(compositorZh(isPlaying ? "Pause" : "Play"))')
+        text = text.replace('.accessibilityLabel(isPlaying ? "Pause" : "Play")', '.accessibilityLabel(compositorZh(isPlaying ? "Pause" : "Play"))')
+        text = text.replace('Frame \\(frameNumber) of \\(frames.count)', '第 \\(frameNumber) 帧，共 \\(frames.count) 帧')
         text = text.replace(' · Original', ' · 原始时长').replace('Frame \\(number)', '第 \\(number) 帧')
         path.write_text(text)
     path = output / 'Compositor/UI/ExportAsSheet.swift'
