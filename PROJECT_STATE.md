@@ -10,13 +10,13 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - 不覆盖 /Applications/Compositor.app；中文预览为独立 local.compositor.zh。
 - 只翻译显示边界；不改文档模型、枚举 rawValue、快捷键/功能标识、用户文件名或图层名。构建成功不等于完整目标 VERIFIED。
 
-## 当前基线及交付（2026-11-27）
+## 当前基线及交付（2026-11-28）
 
-- 官方 1.7.4，固定源码 293917c287b14413675bbe417c95802145da6679。汉化提交 daafd2591c19d9ac2ca99bc783d6c32dcd8de490。
-- 新增视频导入/帧截取时间轴，补齐播放、静音、截取帧、重新链接及不可用提示（含动态辅助标签/帮助和内联错误显示）；词库 909 条，静态候选 0。保留视频书签、文档字段和撤销标识，生成 Document/ProjectStore 与上游一致。项目格式升至 23，旧版不接受新格式，请用副本试用。
-- [中文预览](https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.7.4-zh.preview.1) ZIP 已上传，13,369,811 字节，SHA256 28e83f5b0c0008bac2f3497d22a4033e23f0f5bac527bcb9dbeae90de1521671，附 SHA256SUMS.txt。
-- [构建 45925695822](https://github.com/skyyzc/Compositor-ZH/actions/runs/45925695822) 通过 14 项本地化检查和 50 套件、430 项云端测试（43.217 秒），日志 TEST SUCCEEDED；新增 MovieFrameTests、BrushTests、BrushIntersectionTests、RasterSnapshotTests 范围通过。实际中文布局、视频播放/重新链接和编辑体验待人工验收。
-- [发布 45926446209](https://github.com/skyyzc/Compositor-ZH/actions/runs/45926446209) 成功，已核对资产 uploaded、大小和摘要。未操作桌面、启动、安装或替换应用。
+- 官方 1.7.6，固定源码 3fa8b44fe37faf452ea80fb18c367b130113f67e。汉化提交 f2ecbe821de4fddd4c220c5f0c225b3ddb512c3f。
+- 跟进 GIF 时间轴布局/逐帧滑动、缩放控件及标签样式；补齐放大、缩小、帧延迟、GIF 帧和动态帧序号辅助提示。词库 913 条，静态候选 0。Document/ProjectStore 与固定上游一致，项目格式仍为 23。
+- [中文预览](https://github.com/skyyzc/Compositor-ZH/releases/tag/v1.7.6-zh.preview.1) ZIP 已上传，13,389,031 字节，SHA256 b8436cad9326a1d2908069940ac1449ec616f2f8d27bf916eaa93fd629bf0213，附 SHA256SUMS.txt。
+- [构建 46096394199](https://github.com/skyyzc/Compositor-ZH/actions/runs/46096394199) 通过 14 项本地化检查和 50 套件、430 项云端测试（58.104 秒），日志 TEST SUCCEEDED。实际中文布局、GIF/视频交互待人工验收。
+- [发布 46097297201](https://github.com/skyyzc/Compositor-ZH/actions/runs/46097297201) 成功，已核对资产 uploaded、大小和摘要。未操作桌面、启动、安装或替换应用。
 
 ## 实现与证据边界
 
@@ -41,7 +41,7 @@ PRIMARY_GOAL：完整可用的简体中文版，并持续跟进官方正式版�
 - automationId=compositor，ACTIVE，每天上海时间 10:00 返回本聊天检查官方正式发行版；版本及待处理状态无变化则保持安静，不重复构建/通知。
 - 新版本出现则继续翻译、定向回归和云端构建，仅在新产物、实质失败或必须用户操作时通知。未截图验收的版本仅发布预览；禁止自动替换用户已验收版本。
 - 任务涉及本地文件时需电脑开机、Codex 运行。
-- NEXT：等待用户对 1.7.4 视频时间轴、帧截取/重新链接及既有编辑界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
+- NEXT：等待用户对 1.7.6 GIF 时间轴/缩放控件、视频交互及既有编辑界面的截图与实际使用反馈；有官方新版本再继续迁移。未跟踪 default.profraw 为旧会话遗留，不属于源码，未改动或提交。
 
 ## 本轮变更 1.6.3 → 1.6.4（2026-11-05）
 
